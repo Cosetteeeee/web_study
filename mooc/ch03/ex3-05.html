@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS选择器</title>
+    <link type="text/css" rel="stylesheet" href="ex3-05-selector.css" />
+  </head>
+  <body>
+    改变css_selector.css中选择器的写法，观察不同选择器写法对规则定义范围的影响
+    <br />
+    选择器可以是：<br />
+    <b>标记选择器</b>（例如：h1）<br />
+    <b>类选择器</b>（例如：.defineclass）<br />
+    <b>ID选择器</b>（例如：#defineID1）<br />
+    <b>交集选择器</b>（例如：h1#defineID1）<br />
+    <b>并集选择器</b>（例如：h1,h2,.defineclass）<br />
+    <b>后代选择器</b>（例如：h2 div）<br />
+    <br />
+    <h1>H1</h1>
+    <h1 class="defineclass">H1 defineclass</h1>
+    <h1 id="defineID1">H1 defineID1</h1>
+    <div><h2>H2</h2></div>
+    <h2 class="defineclass">H2 defineclass</h2>
+    <h2 id="defineID2"><div>H2 defineID2(div)</div></h2>
+  </body>
+</html>

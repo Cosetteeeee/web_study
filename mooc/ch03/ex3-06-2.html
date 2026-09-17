@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS测试</title>
+    <style type="text/css">
+      <!--
+      p{          /*标记选择器*/
+      color:blue; /*蓝色*/
+      font-style:italic;}     /*斜体*/
+      .green{     /*类选择器*/
+      color: green!important;}       /*绿色*/
+      .purple{
+      color:purple;}      /*紫色*/
+      #red{       /*ID选择器*/
+      color:red;} /*红色*/
+      -->
+    </style>
+  </head>
+  <body>
+    <p>标记选择器：蓝色，所有行都以斜体显示</p>
+    <p class="green">类选择器+标记选择器：绿色</p>
+    <p class="green" id="red">ID选择器>类选择器>标记选择器：红色</p>
+    <p id="red" style="color: yellow">行内样式起作用：黄色</p>
+    <p class="purple green">优先级相同的两个选择器，后定义的起作用：紫色</p>
+  </body>
+</html>
