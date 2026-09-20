@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML标记语言（二）演示网页</title>
+    <base target="_blank" />
+    <style type="text/css">
+      #content {
+        width: 300px;
+      }
+      .empoint {
+        background-color: yellow;
+      }
+      a.tip {
+        color: #ff5555;
+        text-decoration: none;
+      }
+      a.tip img {
+        display: none;
+      }
+      a.tip:hover {
+        cursor: hand;
+        z-index: 999;
+      }
+      a.tip:hover .demobox {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 320px;
+        padding: 10px;
+        z-index: 9999;
+      }
+      p {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <p>
+        使用CSS进行网页布局，盒子模型是基础，其含义是将HTML元素看作盒子，这样一来，布局网页元素就是在摆盒子。通过设置盒子属性，可以<span
+          class="empoint"
+          >美化网页元素</span
+        >，示例<a href="ex5-01.html" class="tip"
+          >1<img src="ex5-01.png" class="demobox" /></a
+        >、<a href="ex5-02.html" class="tip"
+          >2<img src="ex5-02.png" class="demobox" /></a
+        >展示了这一点。
+      </p>
+      <p>
+        默认情况下，行内元素从左至右摆盒子，块级元素从上至下摆盒子，这就是“流布局”。一般来说，根据标记名称可知HTML元素默认情况下是行内元素、还是块级元素；不过，<span
+          class="empoint"
+          >使用display样式，可以将行内元素设置为块级元素</span
+        >，<a href="ex5-03.html" class="tip"
+          >垂直导航栏<img src="ex5-03.png" class="demobox" /></a
+        >示例演示了这一点。
+      </p>
+      <p>
+        可以将某个元素进行浮动布局设置。被浮动的元素脱离流布局位置，向左或向右浮动，未被浮动的元素在空白位置进行流布局，并且尽量不留白，<a
+          href="ex5-04.html"
+          class="tip"
+          >图文混排及首字下沉<img
+            src="ex5-04.png"
+            class="demobox" /></a
+        >的例子展现了这一点。<a href="ex5-05.html" class="tip"
+          >标题栏<img src="ex5-05.png" class="demobox" /></a
+        >例子展现了有些元素向左浮动、有些元素向右浮动。我们也可以通过<span
+          class="empoint"
+          >对块级元素进行浮动，使得块级元素水平排列</span
+        >，用这样的方法可以制作<a href="ex5-06.html" class="tip"
+          >水平菜单栏<img src="ex5-06.png" class="demobox" /></a
+        >。
+      </p>
+      <p>
+        使用定位布局，可以将盒子摆在指定的位置。一定要注意<span class="empoint"
+          >相对定位和绝对定位的原点是不同的</span
+        >，相对定位是相对于该元素在流布局中的位置进行再次定位（例如：<a
+          href="ex5-07.html"
+          class="tip"
+          >鼠标移至菜单项时，菜单项微移动<img
+            src="ex5-07.png"
+            class="demobox" /></a
+        >），绝对定位是相对于该元素的某一个父元素进行定位（例如：<a
+          href="ex5-08.html"
+          class="tip"
+          >术语提示信息<img src="ex5-08.png" class="demobox" /></a
+        >）。
+      </p>
+    </div>
+  </body>
+</html>

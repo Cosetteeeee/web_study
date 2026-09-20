@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>悬浮简介</title>
+    <style type="text/css">
+      a.tip {
+        color: red;
+        text-decoration: none;
+        position: relative;
+      }
+      .popbox {
+        display: none;
+      }
+      a.tip:hover {
+        cursor: pointer;
+        z-index: 999;
+      }
+      a.tip:hover .popbox,
+      a.tip:hover + .popbox {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: -30px;
+        width: 100px;
+        background-color: #424242;
+        color: #ffffff;
+        padding: 10px;
+        z-index: 9999;
+      }
+      p {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Web前端技术：<a href="#" class="tip"
+        >Ajax<span class="popbox"
+          >Ajax是一种浏览器无刷新就能和Web服务器交换数据的技术</span
+        ></a
+      >技术和<a href="#" class="tip"
+        >CSS<span class="popbox">Cascading Style Sheets层叠样式表</span></a
+      >的关系
+    </p>
+  </body>
+</html>

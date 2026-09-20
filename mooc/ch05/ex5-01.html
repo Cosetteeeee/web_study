@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>美化表单</title>
+    <style type="text/css">
+      form {
+        border: 1px dotted #000999;
+        padding: 1px 6px;
+        margin: 0px;
+        font: 14px Arial;
+      }
+      input {
+        color: #00008b;
+      }
+      input.txt {
+        background-color: #ffeeee;
+        border: none;
+        border-bottom: 1px solid #266980;
+        color: #1d5061;
+      }
+      input.btn {
+        color: #00008b;
+        background-color: #add8e6;
+        border: 1px outset #00008b;
+        padding: 1px 2px 1px 2px;
+      }
+      select {
+        width: 100px;
+        color: #00008b;
+        background-color: #add8e6;
+        border: 1px solid #00008b;
+      }
+      textarea {
+        width: 200px;
+        height: 40px;
+        color: #00008b;
+        background-color: #add8e6;
+        border: 1px inset #00008b;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="myForm1">
+      <p>
+        用户名：<input class="txt" type="text" name="commments" size="15" />
+      </p>
+      <p>密码：<input class="txt" type="password" name="passwd" size="15" /></p>
+      <p>
+        所在地：<select name="addr">
+          <option value="1">湖南</option>
+          <option value="2">广东</option>
+          <option value="3">江苏</option>
+          <option value="4">四川</option>
+        </select>
+      </p>
+      <p>
+        个性签名：<br /><textarea name="sign" cols="20" rows="4"></textarea>
+      </p>
+      <p>
+        <input class="btn" type="submit" name="Submit" value="登录" /><input
+          class="btn"
+          type="reset"
+          name="Reset"
+          value="重置"
+        />
+      </p>
+    </form>
+  </body>
+</html>
