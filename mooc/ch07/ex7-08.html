@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript对象应用</title>
+    <script language="JavaScript">
+      function student(id, name, url) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.display = student_display;
+      }
+      function student_display() {
+        document.writeln("id=" + this["id"] + " <br> ");
+        document.writeln("name=" + this["name"] + " <br> ");
+        document.writeln("url= " + this["url"] + " <br> ");
+      }
+      MyStudent = new student("000001", "林琳", "http://www.blcu.edu.cn");
+      MyStudent.display();
+    </script>
+  </head>
+  <body></body>
+</html>

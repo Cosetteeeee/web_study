@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript语法</title>
+  </head>
+  <body>
+    <script type="text/JavaScript">
+      function greet(givenGender) {
+        switch (givenGender) {
+          case "帅哥":
+            alert("帅哥，你好啊！");
+            break;
+          case "美女":
+            alert("美女，你好啊！");
+            break;
+        }
+      }
+    </script>
+    请输入性别：
+    <form>
+      <input type="radio" name="gender" onClick="greet('帅哥')" />帅哥
+      <input type="radio" name="gender" onClick="greet('美女')" />美女
+    </form>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript语法</title>
+    <script type="text/JavaScript">
+      var now = new Date();
+      var day = now.getDay();
+      var dayName;
+      if (day == 0) dayName = "星期日";
+      else if (day == 1) dayName = "星期一";
+      else if (day == 2) dayName = "星期二";
+      else if (day == 3) dayName = "星期三";
+      else if (day == 4) dayName = "星期四";
+      else if (day == 5) dayName = "星期五";
+      else dayName = "星期六";
+      document.write("今天是快乐的", dayName);
+    </script>
+  </head>
+  <body></body>
+</html>

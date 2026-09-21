@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript导入案例</title>
+    <script type="text/JavaScript">
+      function ChangeImage() {
+        var dog_top = dog.style.top;
+        var dog_left = dog.style.left;
+        dog.style.top = cat.style.top;
+        dog.style.left = cat.style.left;
+        cat.style.top = dog_top;
+        cat.style.left = dog_left;
+      }
+    </script>
+  </head>
+  <body onclick="ChangeImage">
+    <div style="font-family: 楷体; color: blue; font-size: 30px">
+      请单击页面
+    </div>
+    <div
+      id="cat"
+      style="position: absolute; top: 60px; left: 10px; width: 422; height: 35"
+    >
+      <img src="cat.gif" width="80" height="80" alt="cat" /><br />
+      <div style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;cat</div>
+    </div>
+    <div
+      id="dog"
+      style="position: absolute; top: 60px; left: 110px; width: 415; height: 26"
+    >
+      <img src="dog.gif" width="80" height="80" alt="dog" /><br />
+      <div style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;dog</div>
+    </div>
+  </body>
+</html>

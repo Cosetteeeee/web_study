@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript对象应用</title>
+    <script language="JavaScript">
+      function member(name, gender) {
+        //构造函数member
+        this.name = name;
+        this.gender = gender;
+      }
+      function showProperty(obj, objString) {
+        var str = "";
+        for (var i in obj) str += objString + "." + i + " = " + obj[i] + "<BR>";
+        return str;
+      }
+      papa = new member("杨宏文", "男生"); //建立对象实例papa
+      document.write(showProperty(papa, "papa"));
+    </script>
+  </head>
+  <body></body>
+</html>
