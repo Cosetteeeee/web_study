@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>访问元素属性的方法</title>
+    <script type="text/JavaScript">
+      function changePic() {
+        var myimg=document.getElementsByTagName("img")[0];
+        myimg.removeAttribute("title");
+        myimg.removeAttribute("class");
+      }
+    </script>
+  </head>
+  <body>
+    <img src="cat.jpg" title="猫" onclick="changePic()" class="pic" />
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文本拷贝</title>
+  </head>
+  <body>
+    输入文本框1<br />
+    <form>
+      <input
+        type="text"
+        onchange="document.my.elements[0].value = this.value"
+      />
+    </form>
+    输入文本框2<br />
+    <form name="my">
+      <input
+        type="text"
+        onchange="document.forms[0].elements[0].value = this.value"
+      />
+    </form>
+    焦点移出一个文本框后，该文本框内容拷贝到另一格文本框中
+  </body>
+</html>

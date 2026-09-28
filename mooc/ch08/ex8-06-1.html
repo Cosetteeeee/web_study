@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>访问元素属性的方法</title>
+    <script type="text/JavaScript">
+      function init() {
+        var img=document.getElementById("img1");
+        alert(img.getAttribute("class"));
+        alert(img.getAttribute("src"));
+        alert(img.src);
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <img id="img1" src="cat.jpg" alt="img1" class="class1" />
+  </body>
+</html>

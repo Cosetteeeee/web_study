@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>node Type Demo</title>
+    <script>
+      window.onload = function () {
+        var element = document.getElementById("span");
+        var text = element.firstChild;
+        var property = document.getElementById("span").getAttributeNode("id");
+        alert("这是元素节点的nodeType：" + element.nodeType);
+        alert("这是文本节点的nodeType：" + text.nodeType);
+        alert("这是属性节点的nodeType：" + property.nodeType);
+        alert("这是元素节点的返回值：" + element.nodeName);
+        alert("这是文本节点的返回值：" + text.nodeName);
+        alert("这是属性节点的返回值：" + property.nodeName);
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <span id="span">文本节点</span>
+    </div>
+  </body>
+</html>

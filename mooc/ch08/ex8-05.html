@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文档对象模型应用</title>
+    <script type="text/JavaScript">
+      function searchDOM() {
+        /*getElementById*/
+        // var oLi=document.getElementById("css");
+        // alert(oLi.tagName+" "+oLi.childNodes[0].nodeValue);
+        /*getElementsByName*/
+        // var oLi=document.getElementsByName("css");
+        // alert(oLi[0].tagName+" "+oLi[0].childNodes[0].nodeValue);
+        /*getElementsByTagName*/
+        var oLi=document.getElementsByTagName("li");
+        alert(oLi.length+" "+oLi[0].tagName+" "+oLi[3].childNodes[0].nodeValue);
+        var oUl=document.getElementsByTagName("ul");
+        var oLi2=oUl[1].getElementsByTagName("li");
+        alert(oLi2.length+" "+oLi2[0].tagName+" "+oLi2[1].childNodes[0].nodeValue);
+      }
+    </script>
+  </head>
+  <body onload="searchDOM()">
+    <ul>
+      客户端语言
+      <li>HTML</li>
+      <li>JavaScript</li>
+      <!-- <li id="css">CSS</li> -->
+      <li name="css">CSS</li>
+    </ul>
+    <ul>
+      服务器语言
+      <li>ASP</li>
+      <li>ASP.NET</li>
+      <li>JSP</li>
+    </ul>
+  </body>
+</html>

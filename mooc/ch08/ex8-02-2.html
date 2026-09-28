@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>客户端输入信息验证</title>
+    <script>
+      function myVal(myName) {
+        var myString = prompt("请输入姓名：");
+        if (myString == myName) {
+          var myBool = confirm(myString + '你好！需要显示"口令"吗？');
+          if (myBool) {
+            $("btn").value = "112233";
+          }
+        } else {
+          alert("对不起，用户名错误");
+        }
+      }
+      function init() {
+        if (window.opener) {
+          $("childTitle").value =
+            opener.document.getElementById("parentTitle").value;
+        }
+      }
+      function $(id) {
+        return document.getElementById(id);
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <input
+      type="button"
+      id="btn"
+      value="请点击我......"
+      onclick="myVal('123')"
+    />
+    <input type="text" id="childTitle" />
+  </body>
+</html>

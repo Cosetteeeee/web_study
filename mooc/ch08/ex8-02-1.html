@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>打开一个新窗口</title>
+  </head>
+  <body>
+    <font size="4">
+      <b>
+        <p>window对象的open()方法</p>
+        <form>
+          <input
+            type="button"
+            name="ControlButton"
+            value="请把鼠标移过来"
+            onmouseover="
+              window.open(
+                'ex8-02-2.html',
+                '新窗口',
+                'width=350,height=200,toolbar=yes,menubar=yes,location=yes',
+              )
+            "
+          />
+          <input type="button" id="parentTitle" value="test" />
+        </form>
+      </b>
+    </font>
+  </body>
+</html>
