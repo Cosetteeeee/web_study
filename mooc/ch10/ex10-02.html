@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery文本拷贝</title>
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#text1").change(function () {
+          $("#text2").val($(this).val());
+          $("#hint").html("textbox1 to textbox2 over");
+          $("#hint").css("color", "blue");
+        });
+        $("#text2").change(function () {
+          $("#text1").val($(this).val());
+          $("#hint").html("textbox2 to textbox1 over");
+          $("#hint").css("color", "red");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    输入文本框1<br />
+    <input type="text" id="text1" /><br />
+    输入文本框2<br />
+    <input type="text" id="text2" /><br />
+    焦点移出一个文本框后，该文本框内容拷贝到另一格文本框中
+    <div id="hint"></div>
+  </body>
+</html>
