@@ -1,0 +1,1040 @@
+@charset "UTF-8";
+/* ==========================================================================
+   hw2_ai.css —— 天坛｜传承 · 保护 · 公众使用（AI 版）
+   页面：./hw2_ai.html ｜ 学号：202511680488
+
+   设计方向：浅色留白遗产 editorial（参考京都旅游官网的编排节奏），
+   照片主导；琉璃蓝 + 朱砂 + 鎏金点缀；中文衬线标题 + 系统黑体正文。
+
+   交互（纯 CSS，无 JavaScript）：
+   · 导航下划线浮现 / 入口链接括号滑入 / 正文内嵌链接背景高亮
+     （灵感来自 Codrops，见页面「资料来源」，此处为独立重写实现）；
+   · 建筑巡礼：原生 .arch-toggle:checked（触屏/鼠标点按切换）、键盘
+     :focus-visible，以及 @media (hover:hover)(pointer:fine) 内的 .arch-item
+     悬停，三种途径展开同一处 .arch-panel（照片 + 第二层介绍）；
+   · 主题卡片：.heritage-toggle:checked、键盘 :focus-visible（Tab 进入详情
+     链接后由 .heritage-detail:focus-within 保持）、 hover 设备上的
+     .heritage-card 悬停，展开同一处 .heritage-detail（事实 + 来源链接）；
+   · 资料来源：原生 <details>，默认折叠。
+   ========================================================================== */
+
+/* ---------- 设计变量 ---------- */
+:root {
+  --paper:      #f9f6ef;
+  --paper-2:    #f1ebdf;
+  --card:       #fffdf8;
+  --ink:        #2a251d;
+  --ink-soft:   #6a6052;
+  --line:       #e2dac6;
+  --line-strong:#d3c8ac;
+  --blue:       #1e4a73;
+  --blue-deep:  #153655;
+  --red:        #a03c2a;
+  --gold:       #b08a2e;
+  --gold-soft:  rgba(176, 138, 46, .16);
+  --serif: "Songti SC", "STZhongsong", "STSong", "SimSun", "NSimSun",
+           "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --sans:  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+           "Noto Sans CJK SC", sans-serif;
+  --ease:  cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ---------- 基础 ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+p { margin: 0; }
+
+a { color: var(--blue); }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: rgba(176, 138, 46, .28); }
+
+section[id] { scroll-margin-top: 2rem; }
+
+.wrap {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+/* 跳转链接：仅聚焦时可见 */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: .6rem;
+  z-index: 60;
+  padding: .5rem 1.1rem;
+  background: var(--blue-deep);
+  color: #f7f2e7;
+  text-decoration: none;
+  border-radius: 2px;
+  transform: translateY(-300%);
+  transition: transform .25s var(--ease);
+}
+.skip-link:focus-visible { transform: none; }
+
+/* 视觉隐藏但可聚焦的原生控件（label 负责点按切换） */
+.toggle-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ---------- 页眉与导航 ---------- */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: rgba(249, 246, 239, .94);
+}
+
+.header-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem 2rem;
+  padding-block: 1.05rem;
+}
+
+.brand { margin: 0; }
+
+.brand a {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand-en {
+  margin-left: .9em;
+  font-family: var(--sans);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  vertical-align: .28em;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2rem clamp(1.1rem, 3vw, 2.2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Codrops Creative Link Effects 思路 · 下划线浮现 + 轻移（重写实现） */
+.site-nav a {
+  position: relative;
+  display: inline-block;
+  padding: .2rem 0;
+  font-size: .94rem;
+  letter-spacing: .1em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .3s, transform .3s var(--ease);
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0;
+  transform: scaleX(.3) translateY(5px);
+  transition: transform .32s var(--ease), opacity .32s;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--blue-deep);
+  transform: translateY(-2px);
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1) translateY(0);
+}
+
+/* ---------- 概览 Hero ---------- */
+.hero {
+  position: relative;
+  /* 背景大字向右出血的装饰在此容器内裁切，不外溢到文档 */
+  overflow: hidden;
+  overflow: clip;
+  padding-block: clamp(2.75rem, 6vw, 5rem) clamp(3rem, 7vw, 5.5rem);
+}
+
+/* 背景大字渲染（纯装饰，CSS 生成内容不进入可访问性树） */
+.hero::after {
+  content: "祈";
+  position: absolute;
+  top: -5rem;
+  right: -2rem;
+  z-index: 0;
+  font-family: var(--serif);
+  font-size: clamp(15rem, 30vw, 24rem);
+  line-height: 1;
+  color: rgba(30, 74, 115, .05);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.eyebrow {
+  margin-bottom: 1.15rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.eyebrow span[lang="en"] {
+  margin-left: .9em;
+  font-size: .86em;
+  letter-spacing: .22em;
+  opacity: .72;
+}
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: .35rem;
+}
+
+.hero-title h1 {
+  font-size: clamp(3rem, 8vw, 4.6rem);
+  letter-spacing: .2em;
+}
+
+.seal {
+  display: inline-grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.08;
+  text-align: center;
+  color: #fdf6ee;
+  background: var(--red);
+  border-radius: 4px;
+  box-shadow: 0 3px 8px rgba(160, 60, 42, .35);
+}
+
+.hero-sub {
+  margin-bottom: 1.35rem;
+  font-family: var(--serif);
+  font-size: clamp(1.12rem, 2.4vw, 1.4rem);
+  letter-spacing: .14em;
+  color: var(--blue-deep);
+}
+
+.lead { max-width: 37em; }
+
+.fact-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 1.1rem 1.5rem;
+  margin: 2.1rem 0 0;
+}
+
+.fact {
+  margin: 0;
+  padding-top: .65rem;
+  border-top: 2px solid var(--gold);
+}
+
+.fact dt {
+  font-size: .78rem;
+  letter-spacing: .14em;
+  color: var(--ink-soft);
+}
+
+.fact dd {
+  margin: .2rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  letter-spacing: .04em;
+  color: var(--blue-deep);
+}
+
+/* Codrops Creative Link Effects 思路 · 括号滑入（少量使用，重写实现） */
+.entry-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem 2.1rem;
+  margin-top: 2.3rem;
+}
+
+.entry-links a {
+  position: relative;
+  padding: .1em .4em;
+  font-family: var(--serif);
+  font-size: 1.06rem;
+  letter-spacing: .1em;
+  color: var(--blue-deep);
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.entry-links a::before,
+.entry-links a::after {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  font-family: var(--serif);
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity .3s, transform .3s var(--ease);
+}
+
+.entry-links a::before { content: "["; left: -.2em;  transform: translateX(.5em); }
+.entry-links a::after  { content: "]"; right: -.2em; transform: translateX(-.5em); }
+
+.entry-links a:hover,
+.entry-links a:focus-visible { color: var(--red); }
+
+.entry-links a:hover::before, .entry-links a:hover::after,
+.entry-links a:focus-visible::before, .entry-links a:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-media { margin: 0; }
+
+.hero-media img {
+  width: 100%;
+  height: auto;
+  padding: clamp(.5rem, 1.2vw, .9rem);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 44px -20px rgba(42, 37, 29, .3);
+}
+
+.hero-media figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .2rem 1rem;
+  margin-top: .75rem;
+  font-size: .82rem;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+}
+
+/* ---------- 章节通用 ---------- */
+.section {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  max-width: 46rem;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.section-head h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.75rem, 3.6vw, 2.4rem);
+  letter-spacing: .08em;
+}
+
+.section-lead { color: var(--ink-soft); }
+
+/* Codrops Inline Anchor Styles 思路 · 背景高亮渐显（重写实现） */
+.inline-link {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(30, 74, 115, .35);
+  text-underline-offset: .2em;
+  background-image: linear-gradient(var(--gold-soft), var(--gold-soft));
+  background-repeat: no-repeat;
+  background-position: 0 60%;
+  background-size: 0% 92%;
+  transition: background-size .35s var(--ease), color .25s;
+}
+
+.inline-link:hover,
+.inline-link:focus-visible {
+  color: var(--blue-deep);
+  background-size: 100% 92%;
+}
+
+/* ---------- 建筑巡礼：轴线探索器 ---------- */
+/* 基础（移动）形态：竖向轴线名录，面板在条目下方就地展开 */
+.arch-explorer { position: relative; }
+
+/* 轴线 */
+.arch-explorer::before {
+  content: "";
+  position: absolute;
+  left: .6rem;
+  top: 1.6rem;
+  bottom: 1.6rem;
+  width: 2px;
+  background: var(--line);
+}
+
+.arch-item {
+  position: relative;
+  padding: .85rem 0 .85rem 2.3rem;
+}
+
+.arch-trigger {
+  position: relative;
+  display: block;
+  padding: .3rem .4rem .3rem 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 轴线上的节点 */
+.arch-trigger::before {
+  content: "";
+  position: absolute;
+  left: -1.95rem;
+  top: 1.28rem;
+  width: .62rem;
+  height: .62rem;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  transition: background .3s, transform .3s var(--ease);
+}
+
+.arch-toggle:checked ~ .arch-trigger::before,
+.arch-toggle:focus-visible ~ .arch-trigger::before {
+  background: var(--gold);
+  transform: scale(1.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arch-item:hover .arch-trigger::before {
+    background: var(--gold);
+    transform: scale(1.15);
+  }
+}
+
+.arch-name { display: block; }
+
+.arch-name-text {
+  display: inline-block;
+  padding-bottom: .12rem;
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  letter-spacing: .1em;
+  color: var(--ink);
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat 0 100% / 0% 2px;
+  transition: background-size .35s var(--ease), color .3s;
+}
+
+.arch-toggle:checked ~ .arch-trigger .arch-name-text,
+.arch-toggle:focus-visible ~ .arch-trigger .arch-name-text {
+  color: var(--blue-deep);
+  background-size: 100% 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arch-item:hover .arch-name-text {
+    color: var(--blue-deep);
+    background-size: 100% 2px;
+  }
+}
+
+.arch-en {
+  display: block;
+  margin-top: .18rem;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.arch-role {
+  display: block;
+  margin-top: .3rem;
+  font-size: .92rem;
+  color: var(--ink-soft);
+}
+
+.arch-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  margin-top: .5rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: var(--ink-soft);
+}
+
+.arch-chevron {
+  width: .5rem;
+  height: .5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform .35s var(--ease);
+}
+
+.arch-toggle:checked ~ .arch-trigger .arch-chevron { transform: rotate(225deg) translateY(-1px); }
+
+.arch-toggle:focus-visible ~ .arch-trigger {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 第二层 · 照片面板：默认收起，悬停 / 聚焦 / 勾选三种途径展开同一内容 */
+.arch-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .5s var(--ease), visibility 0s linear .5s;
+}
+
+.panel-inner {
+  overflow: hidden;
+  min-height: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 44px -20px rgba(42, 37, 29, .3);
+}
+
+.panel-inner img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.panel-caption { padding: 1.05rem 1.25rem 1.2rem; }
+
+.panel-title {
+  margin-bottom: .45rem;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  color: var(--blue-deep);
+}
+
+.panel-caption p { font-size: .92rem; line-height: 1.78; }
+
+.panel-credit {
+  margin-top: .6rem;
+  font-size: .78rem;
+  color: var(--ink-soft);
+}
+
+/* 展开途径：原生勾选（触屏/鼠标点按）· 键盘 :focus-visible（触屏点按不匹配，故再次点按可立即收起） */
+.arch-toggle:checked ~ .arch-panel,
+.arch-toggle:focus-visible ~ .arch-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  z-index: 3;
+  transition: grid-template-rows .5s var(--ease), opacity .4s var(--ease),
+              transform .45s var(--ease), visibility 0s;
+}
+
+/* 悬停展开仅在真正支持悬停的精确定位设备上启用 */
+@media (hover: hover) and (pointer: fine) {
+  .arch-item:hover .arch-panel {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    z-index: 3;
+    transition: grid-template-rows .5s var(--ease), opacity .4s var(--ease),
+                transform .45s var(--ease), visibility 0s;
+  }
+}
+
+/* 移动形态下面板与触发区间的间距（桌面绝对定位时由媒体查询复位） */
+.arch-panel { margin-top: .8rem; }
+
+/* 桌面形态的提示卡：移动形态下不显示 */
+.arch-stage { display: none; }
+
+.arch-note {
+  margin-top: 1.75rem;
+  font-size: .85rem;
+  color: var(--ink-soft);
+}
+
+/* 桌面（≥64em）：左轴右台，面板锚定在右侧同一展台区域 */
+@media (min-width: 64em) {
+  .arch-explorer {
+    display: grid;
+    grid-template-columns: 17.5rem minmax(0, 1fr);
+    grid-template-rows: repeat(3, auto);
+    column-gap: 2.5rem;
+  }
+
+  .arch-item {
+    grid-column: 1;
+    position: static;          /* 让 .arch-panel 以 .arch-explorer 为定位上下文 */
+    padding-block: 1.35rem;
+  }
+
+  /* 触发区向右延伸出“悬停桥”，移向面板时不中断 :hover */
+  .arch-trigger {
+    margin-right: -2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .arch-stage {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    display: grid;
+    place-items: center;
+    min-height: 38.5rem;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255, 253, 248, .6);
+    border: 1px dashed var(--line-strong);
+  }
+
+  .stage-hint .stage-title {
+    margin-bottom: .8rem;
+    font-family: var(--serif);
+    letter-spacing: .12em;
+    color: var(--blue-deep);
+  }
+
+  .stage-hint p {
+    max-width: 24em;
+    margin-inline: auto;
+    font-size: .92rem;
+    color: var(--ink-soft);
+  }
+
+  .stage-note {
+    margin-top: 1.2rem;
+    font-size: .78rem;
+    letter-spacing: .22em;
+    color: var(--gold);
+  }
+
+  .arch-panel {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: calc(17.5rem + 2.5rem);
+    right: 0;
+    z-index: 2;
+    margin-top: 0;
+    opacity: 0;
+    transform: translateY(14px);
+    visibility: hidden;
+    transition: opacity .4s var(--ease), transform .45s var(--ease),
+                visibility 0s linear .45s;
+  }
+
+  .panel-inner { overflow: visible; }
+}
+
+/* ---------- 传承 · 保护 · 公众使用：三张主题卡 ---------- */
+.heritage-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.heritage-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s;
+}
+
+.heritage-card:has(.heritage-toggle:checked),
+.heritage-card:has(.heritage-toggle:focus-visible) {
+  transform: translateY(-5px);
+  border-color: var(--line-strong);
+  box-shadow: 0 26px 48px -22px rgba(42, 37, 29, .35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heritage-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--line-strong);
+    box-shadow: 0 26px 48px -22px rgba(42, 37, 29, .35);
+  }
+}
+
+.heritage-media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+}
+
+.heritage-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform .7s var(--ease);
+}
+
+.heritage-toggle:checked ~ .heritage-media img,
+.heritage-card:has(.heritage-toggle:focus-visible) .heritage-media img {
+  transform: scale(1.05);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heritage-card:hover .heritage-media img {
+    transform: scale(1.05);
+  }
+}
+
+.media-credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.4rem .85rem .4rem;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(20, 16, 10, .66));
+}
+
+.heritage-body { padding: 1.4rem 1.5rem 1.6rem; }
+
+.heritage-body h3 {
+  margin-bottom: .5rem;
+  font-size: 1.45rem;
+  letter-spacing: .14em;
+}
+
+.heritage-marker {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: .55rem;
+  font-size: .85rem;
+  color: #f7f2e7;
+  background: var(--blue-deep);
+  border-radius: 3px;
+  vertical-align: .22em;
+}
+
+.heritage-abstract {
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+
+/* 第二层 · 详情：默认收起，三种途径展开同一内容 */
+.heritage-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .5s var(--ease), visibility 0s linear .5s;
+}
+
+.detail-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.detail-inner p {
+  margin-top: 1rem;
+  font-size: .93rem;
+  line-height: 1.8;
+}
+
+.detail-inner .detail-links {
+  font-size: .88rem;
+  color: var(--ink-soft);
+}
+
+/* 展开途径：原生勾选（触屏/鼠标点按）· 键盘 :focus-visible；
+   键盘 Tab 进入详情内链接后由 .heritage-detail:focus-within 保持展开 */
+.heritage-toggle:checked ~ .heritage-body .heritage-detail,
+.heritage-toggle:focus-visible ~ .heritage-body .heritage-detail,
+.heritage-detail:focus-within {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows .5s var(--ease), visibility 0s;
+}
+
+/* 悬停展开仅在真正支持悬停的精确定位设备上启用 */
+@media (hover: hover) and (pointer: fine) {
+  .heritage-card:hover .heritage-detail {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows .5s var(--ease), visibility 0s;
+  }
+}
+
+/* 触屏 / 键盘可用的原生切换钮（label → checkbox） */
+.heritage-more {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  margin-top: 1.2rem;
+  padding: .45rem 1.15rem;
+  font-size: .86rem;
+  letter-spacing: .14em;
+  color: var(--blue-deep);
+  background: transparent;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .3s, color .3s, border-color .3s;
+}
+
+.heritage-more:hover {
+  color: #f7f2e7;
+  background: var(--blue-deep);
+  border-color: var(--blue-deep);
+}
+
+.more-icon { position: relative; width: .6rem; height: .6rem; }
+
+.more-icon::before,
+.more-icon::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.more-icon::before { left: 0; top: calc(50% - .75px); width: 100%; height: 1.5px; }
+.more-icon::after {
+  top: 0;
+  left: calc(50% - .75px);
+  width: 1.5px;
+  height: 100%;
+  transition: transform .35s var(--ease);
+}
+
+.heritage-toggle:checked ~ .heritage-body .more-icon::after { transform: rotate(90deg); }
+
+.more-close { display: none; }
+.heritage-toggle:checked ~ .heritage-body .more-open { display: none; }
+.heritage-toggle:checked ~ .heritage-body .more-close { display: inline; }
+
+.heritage-toggle:focus-visible ~ .heritage-body .heritage-more {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* 平板（48em–64em）：卡片横向编排 */
+@media (min-width: 48em) and (max-width: 63.99em) {
+  .heritage-card {
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  }
+
+  .heritage-media,
+  .heritage-media img { height: 100%; }
+
+  .heritage-media img { aspect-ratio: auto; }
+}
+
+/* 桌面（≥64em）：三列 */
+@media (min-width: 64em) {
+  .heritage-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+/* ---------- 资料来源（原生 details，默认折叠） ---------- */
+.source-details {
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.source-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.4rem;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  letter-spacing: .08em;
+  color: var(--blue-deep);
+  list-style: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .3s;
+}
+
+.source-details summary::-webkit-details-marker { display: none; }
+
+.source-details summary:hover { background: rgba(176, 138, 46, .08); }
+
+.summary-icon {
+  flex: none;
+  width: .65rem;
+  height: .65rem;
+  margin-right: .25rem;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(45deg);
+  transition: transform .35s var(--ease);
+}
+
+.source-details[open] .summary-icon { transform: rotate(225deg); }
+
+.source-body {
+  padding: .25rem 1.4rem 1.6rem;
+  border-top: 1px solid var(--line);
+}
+
+.source-group h3 {
+  margin: 1.6rem 0 .7rem;
+  padding-left: .7rem;
+  font-size: 1.05rem;
+  letter-spacing: .12em;
+  border-left: 3px solid var(--gold);
+}
+
+.source-list {
+  display: grid;
+  gap: .55rem;
+  margin: 0;
+  padding-left: 1.5rem;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+
+.source-list a { word-break: break-word; }
+
+.group-note {
+  margin-top: .7rem;
+  font-size: .84rem;
+  color: var(--ink-soft);
+}
+
+.source-note {
+  margin-top: 1.6rem;
+  padding: .9rem 1.1rem;
+  font-size: .84rem;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+
+/* ---------- 页脚 ---------- */
+.site-footer {
+  padding-block: 2.75rem 3rem;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+}
+
+.footer-brand {
+  margin-bottom: .8rem;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  letter-spacing: .3em;
+}
+
+.footer-declare {
+  max-width: 44em;
+  font-size: .86rem;
+  color: var(--ink-soft);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem 1.8rem;
+  margin: 1.3rem 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a {
+  padding-bottom: .12em;
+  font-size: .88rem;
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(30, 74, 115, .3);
+  transition: color .3s, border-color .3s;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--blue-deep);
+  border-color: var(--gold);
+}
+
+.footer-meta {
+  font-size: .78rem;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+}
+
+/* ---------- ≥62em 时 Hero 左右分栏 ---------- */
+@media (min-width: 62em) {
+  .hero-grid { grid-template-columns: minmax(0, 11fr) minmax(0, 13fr); }
+}
+
+/* ---------- 减少动态效果偏好：功能保留，动效收敛 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+  }
+}

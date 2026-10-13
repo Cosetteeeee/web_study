@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript数组对象应用案例</title>
+    <script>
+      function upBookInfo() {
+        document.BookForm.BookTitle.value = this.Title;
+        document.BookForm.BookAuth.value = this.Auth;
+        document.BookForm.BookPublisher.value = this.Publisher;
+      }
+      function Book(title, auth, publisher) {
+        this.Title = title;
+        this.Auth = auth;
+        this.Publisher = publisher;
+        this.UpInfo = upBookInfo;
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      var Books = new Array();
+      Books[0] = new Book("算法与数据结构", "严蔚敏 陈文博", "清华大学出版社");
+      Books[1] = new Book("XML/JSP网页编程教材", "吴艾", "北京希望电子出版社");
+      Books[2] = new Book("英华大字典", "郑易里", "商务印书馆");
+    </script>
+    <font color="blue" face="楷体" size="5">
+      单击按钮查阅书细信息
+      <form name="BookForm">
+        <input
+          type="button"
+          value="算法与数据结构"
+          onclick="Books[0].UpInfo('算法与数据结构')"
+        /><br /><br />
+        <input
+          type="button"
+          value="英华大字典"
+          onclick="Books[2].UpInfo('英华大字典')"
+        /><br /><br />
+        <input
+          type="button"
+          value="XML/JSP网页编程教材"
+          onclick="Books[1].UpInfo('XML/JSP网页编程教材')"
+        /><br /><br />
+        书名：<input type="text" name="BookTitle" /><br /><br />
+        作者：<input type="text" name="BookAuth" /><br /><br />
+        出版社：<input type="text" name="BookPublisher" /><br /><br />
+      </form>
+    </font>
+  </body>
+</html>

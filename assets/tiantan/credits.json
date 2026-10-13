@@ -1,0 +1,76 @@
+{
+  "images": [
+    {
+      "filename": "prayer-winter.jpg",
+      "title": "祈年殿·冬日",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing_-_February_2024.jpg",
+      "author": "Lloyd Tudor",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "width": 1920,
+      "height": 1280,
+      "bytes": 628495,
+      "resize_notes": "原图 6000×4000（约 15 MB）。从 Wikimedia Commons 标准 1920px 缩略图重编码（Pillow，JPEG 质量 82，渐进式，4:2:0），保持 3:2 宽高比，未裁切、未放大。许可 CC BY-SA 4.0（署名—相同方式共享）：使用时须署名 Lloyd Tudor；本缩略图及后续裁剪、缩放等衍生版本须以相同方式共享。"
+    },
+    {
+      "filename": "prayer-sky.jpg",
+      "title": "祈年殿·晴空",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Hall_of_Prayer_for_Good_Harvests_01.jpg",
+      "author": "xiquinhosilva",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "width": 1280,
+      "height": 806,
+      "bytes": 277268,
+      "resize_notes": "原图 2560×1612。直接使用 Wikimedia Commons 标准 1280px 缩略图，未重编码、未裁切。许可 CC BY 2.0：使用时须署名 xiquinhosilva。"
+    },
+    {
+      "filename": "imperial-vault.jpg",
+      "title": "皇穹宇",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Imperial_Vault_of_Heaven_01.jpg",
+      "author": "xiquinhosilva",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "width": 1280,
+      "height": 853,
+      "bytes": 314466,
+      "resize_notes": "原图 2560×1707。直接使用 Wikimedia Commons 标准 1280px 缩略图，未重编码、未裁切。许可 CC BY 2.0：使用时须署名 xiquinhosilva。"
+    },
+    {
+      "filename": "corridor.jpg",
+      "title": "长廊（七十二连房）",
+      "source_page": "https://commons.wikimedia.org/wiki/File:72_Long_Corridor,_Temple_of_Heaven.jpg",
+      "author": "钉钉",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "width": 1280,
+      "height": 960,
+      "bytes": 361988,
+      "resize_notes": "原图 4000×3000。直接使用 Wikimedia Commons 标准 1280px 缩略图，未重编码、未裁切。许可 CC BY-SA 4.0（署名—相同方式共享）：使用时须署名 钉钉；本缩略图及后续裁剪、缩放等衍生版本须以相同方式共享。"
+    },
+    {
+      "filename": "stone-detail.jpg",
+      "title": "石柱雕饰",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Close-up_of_Pillars_at_the_Temple_of_Heaven.jpg",
+      "author": "William Lung-mun Johnson",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "width": 1280,
+      "height": 853,
+      "bytes": 176308,
+      "resize_notes": "原图 1500×1000。直接使用 Wikimedia Commons 标准 1280px 缩略图，未重编码、未裁切。许可 CC BY-SA 4.0（署名—相同方式共享）：使用时须署名 William Lung-mun Johnson；本缩略图及后续裁剪、缩放等衍生版本须以相同方式共享。"
+    },
+    {
+      "filename": "circular-altar.jpg",
+      "title": "圜丘坛",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Circular_Mound_Altar_01.jpg",
+      "author": "xiquinhosilva",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "width": 1280,
+      "height": 853,
+      "bytes": 324027,
+      "resize_notes": "原图 2560×1707。直接使用 Wikimedia Commons 标准 1280px 缩略图，未重编码、未裁切。许可 CC BY 2.0：使用时须署名 xiquinhosilva。"
+    }
+  ]
+}

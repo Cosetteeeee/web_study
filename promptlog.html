@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- promptlog.html —— AI 辅助作业提示词与采纳记录（网页设计任务 1(2) 要求） -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 提示词记录 | 202511680488</title>
+  <style>
+    body { font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f2f8fb; color: #17323c; line-height: 1.8; }
+    main { width: min(1080px, 92vw); margin: 48px auto 80px; }
+    h1 { font-size: 1.7rem; color: #2f5d6a; }
+    h1 small { display: block; font-size: 0.85rem; color: #3d8fae; font-weight: 400; margin-top: 6px; letter-spacing: 0.2em; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(47,93,106,0.10); font-size: 0.92rem; }
+    caption { text-align: left; padding: 14px 18px; font-weight: 700; color: #2f5d6a; background: #e4f1f7; }
+    th, td { padding: 12px 16px; border-bottom: 1px solid #e3eef3; text-align: left; vertical-align: top; }
+    thead th { background: #3d8fae; color: #fff; font-weight: 500; letter-spacing: 0.1em; }
+    tbody tr:nth-child(even) { background: #f6fafc; }
+    tbody tr:hover { background: #eaf4f9; }
+    .ok { color: #1c7a4d; font-weight: 700; }
+    .part { color: #b0722a; font-weight: 700; }
+    .note { margin-top: 20px; font-size: 0.85rem; opacity: 0.75; }
+    a { color: #3d8fae; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>AI 辅助作业提示词记录（promptlog）
+    <small>网页设计任务 1(2)：常州家乡名片 &middot; 课堂任务 2：天坛 HTML/CSS 鼠标交互页面 &middot; 课堂任务 3：作业索引</small>
+  </h1>
+
+  <table>
+    <caption>一、提示词与 AI 结果采纳情况</caption>
+    <thead>
+      <tr><th style="width:6%">#</th><th style="width:34%">我的提示词（摘要）</th><th style="width:44%">AI 输出要点</th><th style="width:16%">采纳情况</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>「做一个我的家乡名片网站（江苏常州），涵盖 MOOC 第 2、3 章内容；先找清新、实用、有创意的参考网页，AI 版可以参考技术复杂的案例，先不要修改文件。」</td>
+        <td>只读调研：以 <a href="https://kyoto.travel/en/" target="_blank" rel="noopener noreferrer">Kyoto Travel</a> 为主版式参考，辅以 Visit Finland、Visit Norwich；动效参考 Codrops 的 Elastic Grid Scroll、Infinite Layers Grid 和 Telescope Zoom。提出城市介绍、兴趣探索、互动影像、风味手艺、路线及影音方案，并核对本地 ch3 例题。</td>
+        <td class="ok">用户已确认采用这一轮方案</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>「就这个方案先帮我写一下，多用些动画，给互动来点层次感。」（本轮用户请求摘要）</td>
+        <td>实现 <a href="homework/hw1_ai.html" target="_blank" rel="noopener">常州 AI 版页面</a>：白底留白；滚动缩放与拆分标题、弹性照片墙、无限拖拽视差相册、分类筛选、可缩放大图、路线切换。采用原生 JavaScript，无 GSAP/CDN 依赖；使用 12 张注明来源和许可的本地照片、摄影放映及合成语音。未创建 build/，未代写手写版。</td>
+        <td class="part">按确认方案实现并完成本地检查；等待用户体验反馈，不预先记录为“全部采纳”</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>二、我的疑问（手写版与 AI 版源代码差异对比）</caption>
+    <thead>
+      <tr><th style="width:22%">对比项</th><th style="width:39%">手写版 hw1.html</th><th style="width:39%">AI 版 hw1_ai.html</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>文件组织</td>
+        <td>仅 <code>homework/hw1.html</code> 一个文件，CSS 写在文档头部的内部样式表中，无 JavaScript；素材位于 <code>assets/changzhou/</code>，网页与多媒体文件分处不同目录，无需构建。</td>
+        <td><code>hw1_ai.html</code>、<code>hw1_ai.css</code>、<code>hw1_ai-base.css</code>、<code>hw1_ai.js</code>；素材位于 <code>assets/changzhou/</code>，无需构建。</td>
+      </tr>
+      <tr>
+        <td>CSS 课程知识点</td>
+        <td>仅使用内部样式表（style 元素）；标记、类、ID 三种选择器，以及链接伪类和后代复合选择器（a.tip:hover .popbox）；font-family、font-size、font-weight、font-style、color、line-height、letter-spacing、text-align、text-indent、text-decoration 共十种文字样式。</td>
+        <td>行内、内部、link 外链、@import 导入四种方式；标签、类、ID、交集、并集、后代选择器；链接伪类与继承。欢迎段落示范普通声明中的选择器优先级、同优先级后写覆盖和行内声明，最终字距为 0.1em。</td>
+      </tr>
+      <tr>
+        <td>交互与动效</td>
+        <td>只有两类纯 CSS 交互：链接悬停变色加下划线，以及参考 MOOC 第 5 章 ex5-07 的「悬浮简介」（a.tip:hover .popbox，共三处）；无 JavaScript、无动效。</td>
+        <td>使用 requestAnimationFrame、IntersectionObserver、Pointer Events、Web Animations 与原生 dialog；保留普通页面滚动，支持键盘操作、手动暂停、系统减弱动态及无脚本阅读。</td>
+      </tr>
+      <tr>
+        <td>多媒体与来源</td>
+        <td>仅 img：六张照片对应六个地点，图注标注作者与 CC BY-SA 4.0；未使用 video/audio。</td>
+        <td>img、带原生控件的 video/audio。照片来自 Wikimedia Commons，逐张署名；约 23 秒视频为静态照片制作的摄影放映，约 21 秒音频为 Microsoft Huihui 合成导览，均明确标注，不冒充实拍视频或现场录音。</td>
+      </tr>
+      <tr>
+        <td>对照结论</td>
+        <td>单文件、内部样式表、纯 CSS 悬停交互；全部内容不依赖脚本即可阅读。</td>
+        <td>多文件分工、四种样式引入、交互依赖原生 JavaScript，但保留无脚本阅读；层叠证据分散在外部、内部、行内三层，需在开发者工具中逐层核对。两版素材同源，内容互补：手写版重简洁文字，AI 版重浏览体验。</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">记录时间：2026-10-08。本轮已用 Edge 检查 1440×1000 桌面与 390×844 移动视口，实际操作滚动、筛选、鼠标拖拽、触摸滑动、大图缩放、路线切换和音视频播放，并检查减弱动态与禁用脚本状态。页面已上传学校空间（2026-10-09，FTP 115 个文件全部成功），访问地址 <a href="http://202.112.195.45/space/202511680488/" target="_blank" rel="noopener noreferrer">http://202.112.195.45/space/202511680488/</a>（仅 HTTP，不支持 https），抽查 8 个页面与素材均 HTTP 200 且字节数与本地一致。2026-10-09 手写版 <code>homework/hw1.html</code> 已完成，上方表格二已按两版实际源码填写。</p>
+
+  <table>
+    <caption>三、课堂任务 2：天坛（HTML/CSS 鼠标交互 AI 版）</caption>
+    <thead>
+      <tr><th style="width:6%">#</th><th style="width:34%">我的提示词（摘要）</th><th style="width:44%">AI 输出要点</th><th style="width:16%">采纳情况</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>「以 GPT 为主代理，DeepSeek 初始化，Kimi 负责视觉、排版、响应式与前端编码；先阅读课堂任务要求，调研参考和可用素材。」随后确认选题为天坛。</td>
+        <td>核对 MOOC 第 5 章与作业截图：仅允许 HTML/CSS，禁止 JavaScript；需要初始主信息与交互后次级信息两层。默认 Next.js 输出与要求冲突，因此使用无需构建的静态 HTML/CSS。选取天坛，以传承、保护、利用组织内容，并核查官方资料与照片许可。</td>
+        <td class="ok">用户已确认天坛主题与纯 HTML/CSS 方案</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>「借鉴这几个网页的悬停效果」：<a href="https://tympanus.net/codrops/2013/08/06/creative-link-effects/" target="_blank" rel="noopener noreferrer">Creative Link Effects</a>、<a href="https://tympanus.net/codrops/2014/06/04/inspiration-for-inline-anchor-styles/" target="_blank" rel="noopener noreferrer">Inline Anchor Styles</a>、<a href="https://tympanus.net/codrops/2018/11/27/image-reveal-hover-effects/" target="_blank" rel="noopener noreferrer">Image Reveal Hover Effects</a>。</td>
+        <td>实际浏览器禁用 JavaScript 验证前两组的下划线与背景高亮。第三组原版依赖 TweenMax 等脚本，因此仅借鉴视觉思路，改用 CSS 锚定照片浮窗与遮罩揭示，不保留实时鼠标跟随。专题卡片需揭示新的内容，而非仅图片放大。</td>
+        <td class="ok">用户已确认这一轮交互取舍，并授权开始编写</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>「那就这么写，开始写吧。」</td>
+        <td>GPT 主代理整合与验收，DeepSeek 通用 task 完成无视觉样式的入口，frontend 子代理按 <code>kimi-code/k3-256k:max</code> 配置负责视觉与前端编码。交付 <a href="homework/hw2_ai.html" target="_blank" rel="noopener">天坛 AI 页面</a>及配套 CSS：导航下划线、入口括号滑入、正文关键词高亮、建筑名称照片揭示，以及传承 / 保护 / 利用三类专题的两层内容。使用原生复选框与 details 控件支持键盘、触屏，使用 6 张本地授权照片并逐张署名；无 JavaScript、框架、运行时 CDN 或 build 目录。</td>
+        <td class="part">按确认方案实现并完成本地验收；等待用户体验反馈，不预先记为全部采纳</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>验收阶段的修正要求（主代理提出，并非用户原话）：修复装饰水印导致的横向溢出，以及触屏收起后因保留焦点仍显示详情的问题；保持 Kimi 的配色、字体和布局。</td>
+        <td>交回同一个 Kimi 子代理：只在水印所属区域裁切溢出，移除全页掩盖溢出的规则；用 <code>:focus-visible</code> 区分键盘与点按焦点，将悬停限定在可悬停的精细指针设备，保留详情内链接的键盘访问。另修正照片 alt 的无依据描述、删除圜丘台面材质的未核实断言，并为中和韶乐、三维扫描、神乐署添加真实来源链接与高亮交互。</td>
+        <td class="part">功能修正已通过实际浏览器验证；整体视觉仍待用户评价</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">天坛记录时间：2026-10-09。已在本地 Chromium 浏览器、禁用 JavaScript 的情况下检查 1440×1000 桌面、768×1024 平板、390×844 手机及 320×800 窄屏；实际操作导航与关键词悬停、建筑照片揭示、专题第二层、Tab/Space 键盘访问、手机六个面板的点按展开与收起，以及原生资料折叠栏。检查系统减少动态效果模式后，内容仍可展开与收起；修复后各视口无横向滚动。已上传学校空间（2026-10-09）。</p>
+
+  <table>
+    <caption>四、课堂任务 3：作业索引页面（AI 辅助）</caption>
+    <thead>
+      <tr><th style="width:6%">#</th><th style="width:34%">我的提示词（摘要）</th><th style="width:44%">AI 输出要点</th><th style="width:16%">采纳情况</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>「现在完成该任务，此任务不设定具体风格，不需要顾虑已有项目风格，请你找到一个交互最亮眼布局合理的设计，我需要动画效果充足，鼠标交互新颖，依旧保持刚才的分工，直接开始着手。」同时提供课堂任务 3 的完整要求截图。</td>
+        <td>按截图核对根目录 <code>index.html</code>：首行 h1 使用“26-27（1）Web前端开发课程作业索引”；标题需含专业、姓名、学号；提供课程作业、MOOC 复现页、两个日志的真实新窗口入口，并结合家乡页面的实际元素解释 CSS 层叠。本任务允许 JavaScript，天坛作业仍保持纯 HTML/CSS，不将该限制错误套用到索引页。</td>
+        <td class="ok">用户已授权重做索引页及自由选择新风格；整体视觉仍待体验评价</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>参考调研与分工说明（主代理执行内容，并非额外的用户原话）。</td>
+        <td>实际浏览 <a href="https://tympanus.net/Tutorials/GridToFullPreview/" target="_blank" rel="noopener noreferrer">Codrops 网格拼接预览</a>和 <a href="https://www.eliotbesson.com/works" target="_blank" rel="noopener noreferrer">Eliot Besson 作品索引</a>，借鉴照片揭示、缩放与作品目录的交互思路，不挪用其作品素材。DeepSeek 通用 task 完成无视觉样式的入口及 58 个真实 MOOC 练习的数据；frontend 子代理按 <code>kimi-code/k3-256k:max</code> 配置负责视觉、排版、动画与前端编码；GPT 主代理负责整合和实际浏览器验收，不擅自改写 Kimi 的美学方案。</td>
+        <td class="part">已实现并完成本地功能验收；专业（计算机科学与技术）与手写版页面均已补充，尚未上传，整体视觉待用户体验评价</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>实现与验收说明（主代理执行内容，并非额外的用户原话）：保留指定首行 h1 和真实课程入口，丰富动画与鼠标交互，兼顾手机、键盘和减少动态效果。</td>
+        <td>Kimi 交付原生 <code>index.html</code>、<code>index.css</code>、<code>index.js</code>：墨色与米白的作品目录式索引，标题逐字响应鼠标，真实照片墙自动横移并支持拖拽与翻页键，作业悬停呈现跟随鼠标的照片预览和缩放，入口使用磁吸反馈，章节可展开与搜索，CSS 层叠示例可逐层切换并显示实际计算结果。页面提供动效暂停、系统减少动态效果支持、照片来源与许可链接；JavaScript 不可用时仍保留原生课程链接与章节展开。没有额外框架、构建依赖或复制参考站的作品素材。</td>
+        <td class="part">代码已写入项目并本地验证；未将缺失的手写版当作已完成作业</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>重要辅助调试记录（主代理实测发现问题后，交回同一个 Kimi 子代理修正）。</td>
+        <td>修复照片固有高度造成的拉伸与首屏过长；禁用原生图片拖拽，避免浏览器取消自定义照片墙手势；解决标题入场动画覆盖鼠标位移及暂停后重播的问题；在字距过渡完成后读取真实 CSS 计算值，避免显示上一状态；正确区分手动暂停和系统减少动态效果；允许长文件名换行，并限制磁吸位移的视口边界。照片替代文本也依据真实画面修正，不再描述未经照片支持的“雪后”。主代理保留 Kimi 的配色、字体和布局，没有另做一套美学方案。</td>
+        <td class="ok">上述问题已在真实浏览器修正后复验</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">索引记录时间：2026-10-09。学号已核查为 202511680488；姓名经用户截图原图放大确认是谢晓萌，专业已确认为计算机科学与技术并写入页面标题区。手写版 <code>homework/hw1.html</code> 已于当日完成并接入索引，两版源码差异对比见上方表格二；第 2 章目录为空，不虚构练习。CSS 层叠证据取自常州 AI 页的实际元素：外部 0.02em → 页内同选择器后写规则 0.07em → 行内 0.1em；索引提供对应的真实计算值示例。页面已上传学校空间（2026-10-09）。</p>
+  <p class="note">本地实页验收：1440px 桌面、768px 平板、390px 及 320px 手机均已检查；320px 的布局与滚动宽度均为 320px，没有用全局裁切掩盖溢出。实际鼠标拖动 300px 对应照片墙位移 300px；标题反馈、照片跟随和放大、磁吸入口、触屏横拖与纵向滚动、键盘操作、动效暂停和系统减少动态效果均已操作。章节搜索验证了 4 个匹配、0 个匹配及清空恢复 58 个入口；层叠切换实际计算值为 0.02em、0.07em、0.1em，全部规则关闭时为 normal。禁用 JavaScript 后原生入口与章节展开仍可使用。64 个不同的本地目标（58 个 MOOC 页、两个作业页、两个日志和两份素材来源清单）均返回 HTTP 200；另实际点击了练习、两份作业和两份日志的新窗口入口。此记录不代表逐一验证了全部教材脚本，教材的作用域报错和占位空页面没有被擅自修复；父子窗口示例仍需从父页在本地 HTTP 环境中打开子页。</p>
+
+</main>
+</body>
+</html>

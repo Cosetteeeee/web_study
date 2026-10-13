@@ -1,11 +1,352 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>26-27（1）Web前端开发课程作业索引 | 谢晓萌 202511680488</title>
+  <link rel="stylesheet" href="index.css">
+
+  <!-- 层叠演示第 1 层：复刻 homework/hw1_ai-base.css:160-165（经 hw1_ai.css:14 @import 引入），选择器权重 (0,1,0) -->
+  <style id="cascade-layer-1">
+    .welcome-lede { letter-spacing: 0.02em; }
+  </style>
+  <!-- 层叠演示第 2 层：复刻 homework/hw1_ai.html:40-41 内部样式表，同选择器 (1,1,0) 两条，后写覆盖先写 -->
+  <style id="cascade-layer-2">
+    #welcome .welcome-lede { letter-spacing: 0.05em; }
+    #welcome .welcome-lede { letter-spacing: 0.07em; }
+  </style>
+
+  <script defer src="index.js"></script>
 </head>
 <body>
-  <h1>我的个人网站</h1>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="hero">
+    <h1 class="hero-title">26-27（1）Web前端开发课程作业索引</h1>
+    <p class="hero-meta">2026–2027 学年第一学期 · 计算机科学与技术专业 · 谢晓萌 · 学号 <strong>202511680488</strong> · 课程作业 ×3 + MOOC 随堂练习 ×58 · 作业与日志链接均在新窗口打开</p>
+
+    <nav class="hero-nav" aria-label="页面目录">
+      <ul>
+        <li><a href="#coursework">课程作业</a></li>
+        <li><a href="#mooc">MOOC 练习（58）</a></li>
+        <li><a href="#cascade">CSS 层叠示例</a></li>
+        <li><a href="#records">建设记录</a></li>
+      </ul>
+    </nav>
+
+    <div class="wall" role="region" aria-label="作业照片墙：常州与天坛的真实照片，可用鼠标拖拽或键盘方向键浏览">
+      <ul class="wall-track">
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/nanshi-river.jpg" alt="白墙民居与垂柳沿南市河排开，远处高楼倒映在平静水面" width="1920" height="1440">
+            <figcaption>南市河 · 常州老城 — MNXANL</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/tiantan/prayer-winter.jpg" alt="灰白天空下的天坛祈年殿，三重檐与红色殿身" width="1920" height="1280">
+            <figcaption>祈年殿 · 冬日 — Lloyd Tudor</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/qingguo-alley-night.jpg" alt="暮色里的青果巷水巷，白墙老宅与灯火倒映在水面" width="1400" height="1224" loading="lazy">
+            <figcaption>青果巷夜色 — MNXANL</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/tiantan/prayer-sky.jpg" alt="晴空下的天坛祈年殿" width="1280" height="806" loading="lazy">
+            <figcaption>祈年殿 · 晴空 — xiquinhosilva</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/tianning-pagoda.jpg" alt="晴空下的天宁宝塔与塔前白色九龙柱" width="1276" height="1920" loading="lazy">
+            <figcaption>天宁宝塔 — Jakub Hałun</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/tiantan/imperial-vault.jpg" alt="天坛皇穹宇" width="1280" height="853" loading="lazy">
+            <figcaption>皇穹宇 — xiquinhosilva</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/hongmei-park.jpg" alt="公园湖面上蜿蜒的白色栏杆步道与垂柳" width="1400" height="1050" loading="lazy">
+            <figcaption>红梅公园 — Slyronit</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/tiantan/circular-altar.jpg" alt="天坛圜丘坛" width="1280" height="853" loading="lazy">
+            <figcaption>圜丘坛 — xiquinhosilva</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/wenheng-bridge.jpg" alt="青石拱桥横跨水面，桥侧龙头雕刻清晰可见，背景是老城与新楼" width="1920" height="1440" loading="lazy">
+            <figcaption>文亨桥 — Vesekskiy</figcaption>
+          </figure>
+        </li>
+        <li class="wall-item">
+          <figure>
+            <img src="assets/changzhou/tianmu-lake.jpg" alt="湛蓝湖面与环湖的葱郁山丘" width="1400" height="1050" loading="lazy">
+            <figcaption>天目湖 — William Ng</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
+    <p class="wall-hint">照片带自动漂移：拖拽可快速浏览，悬停减速，键盘 ←/→ 翻页；开启「减少动态效果」或点击右下角暂停按钮后静止。全部照片为两项作业的真实素材，署名见页尾。</p>
+  </header>
+
+  <main id="main">
+    <section class="section reveal" id="coursework">
+      <div class="section-head">
+        <span class="section-no" aria-hidden="true">01</span>
+        <h2>课程作业</h2>
+      </div>
+      <p class="section-lede">本学期网页设计任务共三类：我的家乡名片（不借助 AI）、我的家乡名片（AI 辅助）、使用 CSS 布局技术制作的有鼠标交互效果的网页。三项作业的首页均在新窗口打开。鼠标悬停（或键盘聚焦）作业条目可预览该作业的真实照片素材。</p>
+
+      <ul class="works">
+        <li class="work" data-preview="assets/changzhou/nanshi-river.jpg" data-preview-caption="南市河 · 常州老城 — 照片：MNXANL（CC BY-SA 4.0）">
+          <span class="work-no" aria-hidden="true">01</span>
+          <div class="work-main">
+            <p class="work-kicker">我的家乡名片（AI 辅助） · 网页设计任务 1(2)</p>
+            <h3 class="work-title">常州 · 龙城 ｜ 我的家乡名片（AI 版）</h3>
+            <p class="work-desc">含行内、内部、link 外链与 @import 四种样式引入方式，以及原生 JavaScript 交互；本页下方「CSS 层叠示例」一节即取自该作业的真实规则与元素。素材清单见 <code>assets/changzhou/manifest.json</code>。</p>
+          </div>
+          <div class="work-actions">
+            <a class="btn-open magnetic" href="homework/hw1_ai.html" target="_blank" rel="noopener">新窗口打开作业首页 <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <figure class="work-thumb">
+            <img src="assets/changzhou/nanshi-river.jpg" alt="白墙民居与垂柳沿南市河排开，远处高楼倒映在平静水面" width="1920" height="1440" loading="lazy">
+            <figcaption>南市河 · 常州老城 — 照片：MNXANL（CC BY-SA 4.0）</figcaption>
+          </figure>
+        </li>
+
+        <li class="work" data-preview="assets/changzhou/qingguo-alley.jpg" data-preview-caption="青果巷 · 唐荆川宅入口 — 照片：MNXANL（CC BY-SA 4.0）">
+          <span class="work-no" aria-hidden="true">02</span>
+          <div class="work-main">
+            <p class="work-kicker">我的家乡名片（不借助 AI） · 网页设计任务 1(1)</p>
+            <h3 class="work-title">常州 · 龙城 ｜ 我的家乡名片（手写版）</h3>
+            <p class="work-desc">单文件手写页：内部样式表演示标记、类、ID 三种选择器与十种文字样式；含锚点目录与页内悬浮简介，纯 HTML/CSS、无 JavaScript。</p>
+          </div>
+          <div class="work-actions">
+            <a class="btn-open magnetic" href="homework/hw1.html" target="_blank" rel="noopener">新窗口打开作业首页 <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <figure class="work-thumb">
+            <img src="assets/changzhou/qingguo-alley.jpg" alt="青果巷中的石牌坊与白墙黛瓦老宅，石板路尽头可见行人" width="1400" height="1050" loading="lazy">
+            <figcaption>青果巷 · 唐荆川宅入口 — 照片：MNXANL（CC BY-SA 4.0）</figcaption>
+          </figure>
+        </li>
+
+        <li class="work" data-preview="assets/tiantan/prayer-winter.jpg" data-preview-caption="祈年殿 · 冬日 — 照片：Lloyd Tudor（CC BY-SA 4.0）">
+          <span class="work-no" aria-hidden="true">03</span>
+          <div class="work-main">
+            <p class="work-kicker">使用 CSS 布局技术制作的有鼠标交互效果的网页 · 课堂任务 2</p>
+            <h3 class="work-title">天坛 ｜ 传承 · 保护 · 公众使用（AI 版）</h3>
+            <p class="work-desc">纯 HTML/CSS（无 JavaScript）实现的鼠标交互效果与响应式布局；照片来源逐张记录于 <code>assets/tiantan/credits.json</code>。</p>
+          </div>
+          <div class="work-actions">
+            <a class="btn-open magnetic" href="homework/hw2_ai.html" target="_blank" rel="noopener">新窗口打开作业首页 <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <figure class="work-thumb">
+            <img src="assets/tiantan/prayer-winter.jpg" alt="灰白天空下的天坛祈年殿，三重檐与红色殿身" width="1920" height="1280" loading="lazy">
+            <figcaption>祈年殿 · 冬日 — 照片：Lloyd Tudor（CC BY-SA 4.0）</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section reveal" id="mooc">
+      <div class="section-head">
+        <span class="section-no" aria-hidden="true">02</span>
+        <h2>MOOC 练习（58 个页面）</h2>
+      </div>
+      <p class="section-lede">课程随堂练习共 58 个 HTML 页面，位于 <code>mooc/</code> 目录，按 ch01–ch09 章节分组；链接均指向本仓库中的真实文件，并在新窗口打开。<code>mooc/ch02</code> 目录为空，没有练习文件。点击章节标题展开/收起；启用 JavaScript 后可按编号或标题搜索过滤。</p>
+
+      <div class="chapters">
+        <details class="chapter">
+          <summary>ch01<span class="chapter-count">2 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch01/ex1-01.html" target="_blank" rel="noopener"><span class="ex-id">ex1-01.html</span><span>简单的html案例（旧式 body link/vlink/alink 属性；页内链接到 ex1-01_1.html）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch01/ex1-01_1.html" target="_blank" rel="noopener"><span class="ex-id">ex1-01_1.html</span><span>Hello World（仅被 ex1-01.html 链接）</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch02<span class="chapter-count">无练习文件，目录为空</span></summary>
+          <p class="chapter-note">mooc/ch02 目录存在但没有任何文件：本章没有练习文件，因此不提供任何链接（也不存在可链接的 index 页面）。</p>
+        </details>
+
+        <details class="chapter">
+          <summary>ch03<span class="chapter-count">13 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch03/ex3-01.html" target="_blank" rel="noopener"><span class="ex-id">ex3-01.html</span><span>CSS例子</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-02-1.html" target="_blank" rel="noopener"><span class="ex-id">ex3-02-1.html</span><span>多网页使用相同的css定义——Page1（与 Page2 共用 ex3-02-style.css）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-02-2.html" target="_blank" rel="noopener"><span class="ex-id">ex3-02-2.html</span><span>多网页使用相同的css定义——Page2</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-03.html" target="_blank" rel="noopener"><span class="ex-id">ex3-03.html</span><span>使用多个css文件定义一个网页的样式（同时链接 ex3-03-style1.css 与 ex3-03-style2.css）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-04-1.html" target="_blank" rel="noopener"><span class="ex-id">ex3-04-1.html</span><span>行内式（内联样式表）：直接定义HTML标记中的style属性</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-04-2.html" target="_blank" rel="noopener"><span class="ex-id">ex3-04-2.html</span><span>定义内部样式表（旧式 &lt;!-- 注释包裹）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-04-3.html" target="_blank" rel="noopener"><span class="ex-id">ex3-04-3.html</span><span>导入外部样式表（@import url(ex3-04-style1.css)）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-04-4.html" target="_blank" rel="noopener"><span class="ex-id">ex3-04-4.html</span><span>链接外部样式表（依次链接 ex3-04-style1.css、ex3-04-style2.css）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-05.html" target="_blank" rel="noopener"><span class="ex-id">ex3-05.html</span><span>CSS选择器</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-06-1.html" target="_blank" rel="noopener"><span class="ex-id">ex3-06-1.html</span><span>CSS测试</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-06-2.html" target="_blank" rel="noopener"><span class="ex-id">ex3-06-2.html</span><span>CSS测试</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-07.html" target="_blank" rel="noopener"><span class="ex-id">ex3-07.html</span><span>CSS Selector（动态伪类；页内含指向 blcu.edu.cn 的外部链接）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch03/ex3-08.html" target="_blank" rel="noopener"><span class="ex-id">ex3-08.html</span><span>CSS测试</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch04<span class="chapter-count">4 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch04/ex4-01.html" target="_blank" rel="noopener"><span class="ex-id">ex4-01.html</span><span>表格标记</span></a></li>
+            <li><a class="ex-link" href="mooc/ch04/ex4-02.html" target="_blank" rel="noopener"><span class="ex-id">ex4-02.html</span><span>列表标记</span></a></li>
+            <li><a class="ex-link" href="mooc/ch04/ex4-03.html" target="_blank" rel="noopener"><span class="ex-id">ex4-03.html</span><span>form</span></a></li>
+            <li><a class="ex-link" href="mooc/ch04/ex4-04.html" target="_blank" rel="noopener"><span class="ex-id">ex4-04.html</span><span>HTML编码</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch05<span class="chapter-count">9 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch05/ex5-01.html" target="_blank" rel="noopener"><span class="ex-id">ex5-01.html</span><span>美化表单</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-02.html" target="_blank" rel="noopener"><span class="ex-id">ex5-02.html</span><span>虚线边框表格</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-03.html" target="_blank" rel="noopener"><span class="ex-id">ex5-03.html</span><span>竖直导航菜单</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-04.html" target="_blank" rel="noopener"><span class="ex-id">ex5-04.html</span><span>北京语言大学简介（float 与 :first-letter 示例，正文为课程样例文本）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-05.html" target="_blank" rel="noopener"><span class="ex-id">ex5-05.html</span><span>水平导航菜单</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-06.html" target="_blank" rel="noopener"><span class="ex-id">ex5-06.html</span><span>栏目标题</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-07.html" target="_blank" rel="noopener"><span class="ex-id">ex5-07.html</span><span>悬浮简介（纯 CSS 悬停浮层，无 JavaScript）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-08.html" target="_blank" rel="noopener"><span class="ex-id">ex5-08.html</span><span>水平导航链接（纯 CSS a:hover 演示）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch05/ex5-09.html" target="_blank" rel="noopener"><span class="ex-id">ex5-09.html</span><span>HTML标记语言（二）演示网页（第 5 章迷你目录页：原页面设 base target=_blank，链接 ex5-01～ex5-08）</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch06<span class="chapter-count">7 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch06/ex6-01.html" target="_blank" rel="noopener"><span class="ex-id">ex6-01.html</span><span>JavaScript导入案例（body onclick 换图；依赖 id 隐式全局变量 dog/cat）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-02.html" target="_blank" rel="noopener"><span class="ex-id">ex6-02.html</span><span>JavaScript导入案例</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-03.html" target="_blank" rel="noopener"><span class="ex-id">ex6-03.html</span><span>JavaScript导入案例</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-04.html" target="_blank" rel="noopener"><span class="ex-id">ex6-04.html</span><span>ex6-04（onload / onmouseover / onclick 弹窗演示）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-05-1.html" target="_blank" rel="noopener"><span class="ex-id">ex6-05-1.html</span><span>行内式JavaScript</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-05-2.html" target="_blank" rel="noopener"><span class="ex-id">ex6-05-2.html</span><span>内嵌式JavaScript</span></a></li>
+            <li><a class="ex-link" href="mooc/ch06/ex6-05-3.html" target="_blank" rel="noopener"><span class="ex-id">ex6-05-3.html</span><span>链接式JavaScript（外链 ex6-05-3.js，是整套 MOOC 中唯一以 src 外链脚本的页面）</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch07<span class="chapter-count">8 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch07/ex7-01.html" target="_blank" rel="noopener"><span class="ex-id">ex7-01.html</span><span>测试运算符</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-02.html" target="_blank" rel="noopener"><span class="ex-id">ex7-02.html</span><span>JavaScript语法</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-03.html" target="_blank" rel="noopener"><span class="ex-id">ex7-03.html</span><span>JavaScript语法</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-04.html" target="_blank" rel="noopener"><span class="ex-id">ex7-04.html</span><span>JavaScript语法</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-05.html" target="_blank" rel="noopener"><span class="ex-id">ex7-05.html</span><span>JavaScript对象应用</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-06.html" target="_blank" rel="noopener"><span class="ex-id">ex7-06.html</span><span>JavaScript对象应用（教学示例：langVBS 在函数内声明、函数外使用，会按设计抛出 ReferenceError，保持原样）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-07.html" target="_blank" rel="noopener"><span class="ex-id">ex7-07.html</span><span>JavaScript对象应用</span></a></li>
+            <li><a class="ex-link" href="mooc/ch07/ex7-08.html" target="_blank" rel="noopener"><span class="ex-id">ex7-08.html</span><span>JavaScript对象应用（MyStudent 全局泄漏教学示例，保持原样）</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch08<span class="chapter-count">10 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch08/ex8-01.html" target="_blank" rel="noopener"><span class="ex-id">ex8-01.html</span><span>第八周测试（弹出 location/navigator 信息；以 file:// 打开时协议显示 file:，属预期）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-02-1.html" target="_blank" rel="noopener"><span class="ex-id">ex8-02-1.html</span><span>打开一个新窗口（父子窗口演示第 1 部分：window.open 打开 ex8-02-2.html）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-02-2.html" target="_blank" rel="noopener"><span class="ex-id">ex8-02-2.html</span><span>客户端输入信息验证（第 2 部分：经 opener 读取父窗口标题；需通过本地 HTTP 访问才能完整同步，file:// 下 Chromium 会失败）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-03.html" target="_blank" rel="noopener"><span class="ex-id">ex8-03.html</span><span>文本拷贝</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-04.html" target="_blank" rel="noopener"><span class="ex-id">ex8-04.html</span><span>无标题（既有练习刻意留白：空 title 与 3×2 空表格，保持原样）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-05.html" target="_blank" rel="noopener"><span class="ex-id">ex8-05.html</span><span>文档对象模型应用</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-06-1.html" target="_blank" rel="noopener"><span class="ex-id">ex8-06-1.html</span><span>访问元素属性的方法</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-06-2.html" target="_blank" rel="noopener"><span class="ex-id">ex8-06-2.html</span><span>访问元素属性的方法（setAttribute 将图片由 cat.jpg 切换为 dog.jpg）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-06-3.html" target="_blank" rel="noopener"><span class="ex-id">ex8-06-3.html</span><span>访问元素属性的方法</span></a></li>
+            <li><a class="ex-link" href="mooc/ch08/ex8-07.html" target="_blank" rel="noopener"><span class="ex-id">ex8-07.html</span><span>node Type Demo</span></a></li>
+          </ul>
+        </details>
+
+        <details class="chapter">
+          <summary>ch09<span class="chapter-count">5 个练习</span></summary>
+          <ul class="ex-list">
+            <li><a class="ex-link" href="mooc/ch09/ex9-01.html" target="_blank" rel="noopener"><span class="ex-id">ex9-01.html</span><span>JavaScript数组对象应用案例</span></a></li>
+            <li><a class="ex-link" href="mooc/ch09/ex9-02.html" target="_blank" rel="noopener"><span class="ex-id">ex9-02.html</span><span>数字钟（使用字符串 setTimeout 与隐式全局变量，保持原样）</span></a></li>
+            <li><a class="ex-link" href="mooc/ch09/ex9-03.html" target="_blank" rel="noopener"><span class="ex-id">ex9-03.html</span><span>背景色随机改变</span></a></li>
+            <li><a class="ex-link" href="mooc/ch09/ex9-04.html" target="_blank" rel="noopener"><span class="ex-id">ex9-04.html</span><span>StingtoNumber</span></a></li>
+            <li><a class="ex-link" href="mooc/ch09/ex9-05.html" target="_blank" rel="noopener"><span class="ex-id">ex9-05.html</span><span>Document（空 body 的存量样例，保持原样）</span></a></li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="section reveal" id="cascade">
+      <div class="section-head">
+        <span class="section-no" aria-hidden="true">03</span>
+        <h2>CSS 层叠示例</h2>
+      </div>
+
+      <div class="cascade-grid">
+        <div class="cascade-explain">
+          <p>以下示例取自 <a href="homework/hw1_ai.html" target="_blank" rel="noopener">hw1_ai.html</a>（网页设计任务 1(2) 的 <strong>AI 辅助版</strong>）中欢迎段落 <code>#welcome .welcome-lede</code> 的 <code>letter-spacing</code>：同一元素被三层普通声明依次命中，最终生效的是行内值 <code>0.1em</code>。</p>
+          <ol>
+            <li>第 1 层 · 外部样式表（hw1_ai.css 经 @import 引入的基础层）：选择器 <code>.welcome-lede</code>，权重 (0,1,0)，<code>letter-spacing: 0.02em</code>。</li>
+            <li>第 2 层 · 文档内部样式表（hw1_ai.html 的 style 元素）：选择器 <code>#welcome .welcome-lede</code>，权重 (1,1,0)，先后声明 <code>0.05em</code> 与 <code>0.07em</code>，同权重后写者胜。</li>
+            <li>第 3 层 · 行内样式（该段落 style 属性）：<code>letter-spacing: 0.1em</code>，普通行内声明最终生效。</li>
+          </ol>
+          <p>比较顺序：同来源、同重要性、同层的声明先比选择器权重，权重相同再比源顺序；行内普通声明优先于作者样式表中的普通声明，而继承来的值不参与直接竞争。该页刻意不使用 <code>!important</code> 覆盖行内声明；<code>!important</code> 只翻转重要性层级，并非万能解，本项目中仅保留给「减少动态效果」的降级样式。在浏览器开发者工具中选中原页面该段落，可逐条看到被划掉的声明。</p>
+        </div>
+
+        <div class="cascade-panel">
+          <div class="cascade-panel-head">
+            <span>实时演示 · 浏览器真实层叠</span>
+            <span>规则逐字复刻自 hw1_ai（AI 辅助版）</span>
+          </div>
+          <div class="cascade-controls" hidden></div>
+          <div id="welcome" class="cascade-stage">
+            <p class="welcome-lede" style="letter-spacing: 0.1em;" data-inline-value="0.1em">常州，古称延陵、毗陵，别称龙城，坐落在江苏南部、长江三角洲的腹地：北枕长江，南衔太湖，京杭大运河自西向东穿过老城。青果巷沿南市河铺开，素称「江南名士第一巷」；天宁寺的钟声、文亨桥的月色、红梅公园里的文笔塔，把这座城的记忆安放在寻常巷陌之间。这一页，是我为家乡做的数字名片。</p>
+          </div>
+          <p class="cascade-readout">当前生效：<output id="cascade-winner">第 3 层 · 行内 style → 0.1em</output><br>计算值：<output id="cascade-computed">0.1em</output>（启用 JavaScript 可逐层开关三层规则，实时观察层叠结果）</p>
+          <ol class="cascade-rules">
+            <li class="is-loser"><span class="rule-tag">层1</span><code>.welcome-lede { letter-spacing: 0.02em; }</code> — 外部基础层（权重 0,1,0）</li>
+            <li class="is-loser"><span class="rule-tag">层2</span><code>#welcome .welcome-lede { letter-spacing: 0.05em; }</code> — 内部样式表（先写，被同权重后写覆盖）</li>
+            <li class="is-loser"><span class="rule-tag">层2</span><code>#welcome .welcome-lede { letter-spacing: 0.07em; }</code> — 内部样式表（后写，权重 1,1,0）</li>
+            <li class="is-winner"><span class="rule-tag">层3</span><code>style="letter-spacing: 0.1em;"</code> — 行内样式（最终生效）</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="records">
+      <div class="section-head">
+        <span class="section-no" aria-hidden="true">04</span>
+        <h2>建设记录</h2>
+      </div>
+      <ul class="records-grid">
+        <li>
+          <a class="record-card magnetic" href="websitelog.html" target="_blank" rel="noopener">
+            <h3 class="record-title">网站建设日志 <span class="arrow" aria-hidden="true">↗</span></h3>
+            <p class="record-desc">各任务的日期、状态与验证情况（含三份作业与本索引页），在新窗口打开。</p>
+          </a>
+        </li>
+        <li>
+          <a class="record-card magnetic" href="promptlog.html" target="_blank" rel="noopener">
+            <h3 class="record-title">AI 提示词与采纳记录 <span class="arrow" aria-hidden="true">↗</span></h3>
+            <p class="record-desc">AI 提示词、采纳与修改记录，以及手写版与 AI 版源码差异对照，在新窗口打开。</p>
+          </a>
+        </li>
+      </ul>
+
+      <div class="credits">
+        <p>本页照片均为两项课程作业的真实素材，保留署名；裁剪/缩放衍生版本按相同方式共享。常州照片 © MNXANL、Jakub Hałun、Slyronit、Vesekskiy、William Ng（Wikimedia Commons，<a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>），逐张来源见 <a href="assets/changzhou/manifest.json" target="_blank" rel="noopener">assets/changzhou/manifest.json</a>；天坛照片 © Lloyd Tudor（<a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>）、xiquinhosilva（<a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>），逐张来源见 <a href="assets/tiantan/credits.json" target="_blank" rel="noopener">assets/tiantan/credits.json</a>。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-id">计算机科学与技术专业 · 谢晓萌 · 学号：202511680488</p>
+    <p>本页为静态页面：无 JavaScript 时全部内容与原生链接照常可用。</p>
+  </footer>
 </body>
 </html>

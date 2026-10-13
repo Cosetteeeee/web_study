@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>背景色随机改变</title>
+  </head>
+  <body>
+    <script type="text/JavaScript">
+          var mybool=false
+      color_bar=new Array(3)
+      for(var i=0;i<color_bar.length;i++){
+        while(mybool==false){
+      line1:  var start_num=Math.round(Math.random()*255)
+          if(start_num>255){
+            mybool=false
+            continue
+          }
+          color_bar[i]=start_num
+          mybool=true
+        }
+        mybool=false
+      }
+      line2: var a=color_bar[0].toString(16)
+      if(a.length<2){
+        a=("0"+a)
+      }
+      var b=color_bar[1].toString(16)
+      if(b.length<2){
+        b=("0"+b)
+      }
+      var c=color_bar[2].toString(16)
+      if(c.length<2){
+        c=("0"+c)
+      }
+      line3: var mkcolor=("#"+a+b+c)
+      document.bgColor=mkcolor
+      document.write("<font face='楷体' color='white' size=6>背景色是："+mkcolor+"</font>")
+    </script>
+  </body>
+</html>

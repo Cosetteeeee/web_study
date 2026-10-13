@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<!--
+  常州 · 龙城 | 我的家乡名片（AI 版）
+  课程作业：网页设计 · 学号 202511680488 ｜ 提示词与采纳记录：../promptlog.html
+  静态页面：无框架、无 CDN、无构建；样式见 ./hw1_ai.css（内含 @import 基础层），
+  交互见 ./hw1_ai.js（唯一脚本，defer 引入）。
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常州 · 龙城 | 我的家乡名片（AI 版）</title>
+  <meta name="description" content="一页看常州：南市河、青果巷、天宁寺、文亨桥、红梅公园、天目湖、南山竹海，以及梳篦、大麻糕、银丝面。">
+  <meta name="theme-color" content="#faf8f3">
+  <!-- 内联 SVG 小图标（墨底赭金菱形），避免默认 favicon 404 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2322252a'/%3E%3Cpath d='M16 5.5 26.5 16 16 26.5 5.5 16Z' fill='none' stroke='%23a9854d' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%23a9854d'/%3E%3C/svg%3E">
+
+  <!--
+    ch2/ch3 复习：CSS 四种引入方式在本页中的位置 ——
+    ① 行内式：欢迎段落 <p class="welcome-lede" style="…">、「龙城」水印的 --watermark-opacity、
+       拖拽画廊小图的 --x/--y/--w 坐标；
+    ② 内部样式表：本 <head> 里下面的 <style> 块（层叠实验第 2 层）；
+    ③ 链入式：下面一行 <link rel="stylesheet" href="./hw1_ai.css">；
+    ④ 导入式：hw1_ai.css 首行的 @import url("./hw1_ai-base.css")。
+  -->
+  <link rel="stylesheet" href="./hw1_ai.css">
+
+  <style>
+    /* ============================================================
+       ② 内部样式表（internal style sheet）—— CSS 四种引入方式之二
+       这里是「层叠实验」的第 2 层。同一段文字 .welcome-lede 在全页被三处样式命中：
+         第 1 层（经 @import 引入的 hw1_ai-base.css）：.welcome-lede { letter-spacing: 0.02em }   类选择器 (0,1,0)
+         第 2 层（本 <style> 块）：#welcome .welcome-lede —— ID + 类 + 后代，权重 (1,1,0)
+                                   下面同选择器写了两条：同优先级时「后写覆盖先写」，0.07em 胜出
+         第 3 层（该段的 style 属性）：letter-spacing: 0.1em —— 本例均为作者普通声明，行内样式最终生效
+       打开 F12 选中该段落可逐条核对（被覆盖的声明会显示删除线）。
+       小提示：作者样式表中的 !important 声明可以覆盖普通行内声明；
+       本页刻意不用这一招，保持层叠链干净好读。
+       ============================================================ */
+    #welcome .welcome-lede { letter-spacing: 0.05em; }
+    #welcome .welcome-lede { letter-spacing: 0.07em; } /* 同优先级：后写覆盖先写 */
+  </style>
+
+  <script defer src="./hw1_ai.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"><i></i></div>
+
+  <!-- ===================== 头部 ===================== -->
+  <header class="site-header" data-header>
+    <div class="header-inner wrap">
+      <a class="brand" href="#home">
+        <span class="brand-mark" aria-hidden="true">常</span>
+        <span class="brand-text">龙城 · 常州<small>AI 版家乡名片</small></span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="页面导航">
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#welcome">印象</a></li>
+          <li><a href="#facts">名片</a></li>
+          <li><a href="#explore">探索</a></li>
+          <li><a href="#gallery">影像</a></li>
+          <li><a href="#flavor">味道</a></li>
+          <li><a href="#routes">路线</a></li>
+          <li><a href="#media">影音</a></li>
+        </ul>
+      </nav>
+      <div class="header-tools">
+        <button type="button" class="tool-btn" data-motion-toggle aria-pressed="false">
+          <span class="when-on">暂停动效</span><span class="when-off">恢复动效</span>
+        </button>
+        <button type="button" class="tool-btn menu-toggle" data-menu-toggle aria-controls="site-nav" aria-expanded="false">菜单</button>
+      </div>
+    </div>
+  </header>
+
+  <noscript>
+    <p class="noscript-note">检测到浏览器未启用 JavaScript：筛选、拖拽画廊与大图查看暂时不可用；页面内容仍可完整阅读。</p>
+  </noscript>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ===================== 00 · Hero ===================== -->
+    <section class="hero" id="home" data-hero>
+      <div class="hero-stage">
+        <figure class="hero-media" data-hero-image>
+          <img src="../assets/changzhou/nanshi-river.jpg"
+               alt="白墙民居与垂柳沿南市河排开，远处高楼倒映在平静水面"
+               width="1920" height="1440" fetchpriority="high" decoding="async">
+        </figure>
+
+        <h1 class="hero-title">
+          <span class="hero-char hero-char--left" data-hero-title="left">常</span>
+          <span class="hero-char hero-char--right" data-hero-title="right">州</span>
+        </h1>
+
+        <p class="hero-kicker">
+          <span class="hero-kicker-cn">江苏 · 常州</span>
+          <span class="hero-kicker-en">CHANGZHOU · JIANGSU</span>
+        </p>
+
+        <p class="hero-side">龙城 · 常乐之州</p>
+
+        <p class="hero-credit">南市河 · 常州老城</p>
+
+        <a class="hero-hint" href="#welcome">
+          向下浏览
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 4v14M6.5 12.5 12 18l5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <figure class="hero-float hero-float--a" data-hero-float>
+          <img src="../assets/changzhou/qingguo-alley-night.jpg"
+               alt="暮色里的青果巷水巷，白墙老宅与灯火倒映在水面"
+               width="1400" height="1224" decoding="async">
+          <figcaption>青果巷 · 夜色</figcaption>
+        </figure>
+
+        <figure class="hero-float hero-float--b" data-hero-float>
+          <img src="../assets/changzhou/tianning-pagoda.jpg"
+               alt="晴空下的天宁宝塔与塔前白色九龙柱"
+               width="1276" height="1920" decoding="async">
+          <figcaption>天宁宝塔</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== 01 · 欢迎 ===================== -->
+    <section class="section" id="welcome" data-reveal>
+      <!-- 行内式②：这个水印只给了自定义属性 --watermark-opacity，样式规则仍写在样式表里 -->
+      <span class="welcome-watermark" aria-hidden="true" style="--watermark-opacity: 0.055">龙城</span>
+      <div class="wrap welcome-wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">01</span>Welcome · 欢迎</p>
+          <h2 class="display">运河穿城，塔影入巷</h2>
+          <p class="welcome-alias">延陵 · 毗陵 · 龙城</p>
+        </header>
+
+        <!--
+          【层叠实验 · 第 3 层（行内式）】下面这段 <p> 的 style 属性是 CSS 四种引入方式中的「行内式」。
+          它的 letter-spacing 被三层样式命中：
+            ① hw1_ai-base.css 的 .welcome-lede（类选择器）              → 0.02em
+            ② 页内 <style> 的 #welcome .welcome-lede（ID+类，后写者胜）  → 0.07em
+            ③ 本例的普通行内声明                                        → 0.1em ← 最终生效
+          在开发者工具里选中这段文字，可以逐条看到被划掉的声明；
+          把下面的数值改一改，字距会立刻变化。
+        -->
+        <p class="welcome-lede" style="letter-spacing: 0.1em;">常州，古称延陵、毗陵，别称龙城，坐落在江苏南部、长江三角洲的腹地：北枕长江，南衔太湖，京杭大运河自西向东穿过老城。青果巷沿南市河铺开，素称「江南名士第一巷」；天宁寺的钟声、文亨桥的月色、红梅公园里的文笔塔，把这座城的记忆安放在寻常巷陌之间。这一页，是我为家乡做的数字名片。</p>
+      </div>
+    </section>
+
+    <!-- ===================== 02 · 城市名片 ===================== -->
+    <section class="section" id="facts" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">02</span>Profile · 城市名片</p>
+          <h2 class="display">关于常州，先记这几件事</h2>
+          <p class="section-lede">一边是运河串起的老城，一边是溧阳舒展的湖山。先认识这座城，再慢慢走进它。</p>
+        </header>
+
+        <table class="facts-table">
+          <caption>常州速览 · 从城市方位，到值得留意的风味与手艺</caption>
+          <tbody>
+            <tr>
+              <th scope="row">所属省份</th>
+              <td>江苏省 · 长江三角洲腹地；北枕长江，南衔太湖，东邻无锡，西接镇江与南京。</td>
+            </tr>
+            <tr>
+              <th scope="row">城市性质</th>
+              <td>江苏省辖地级市；上海大都市圈、苏锡常都市圈成员城市。</td>
+            </tr>
+            <tr>
+              <th scope="row">行政区划</th>
+              <td>辖金坛、武进、新北、天宁、钟楼 5 个市辖区，代管县级溧阳市。</td>
+            </tr>
+            <tr>
+              <th scope="row">古称与别称</th>
+              <td>延陵、毗陵、晋陵、兰陵等；别称「龙城」。</td>
+            </tr>
+            <tr>
+              <th scope="row">城市意象</th>
+              <td>大运河与老城巷陌：青果巷、天宁寺、红梅公园、文亨桥；溧阳的湖山：天目湖、南山竹海。</td>
+            </tr>
+            <tr>
+              <th scope="row">风味与手艺</th>
+              <td>大麻糕、银丝面、天目湖砂锅鱼头等风味；梳篦、乱针绣等传统手艺。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== 03 · 兴趣探索 ===================== -->
+    <section class="section" id="explore" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">03</span>Explore · 兴趣探索</p>
+          <h2 class="display">江南的下一站，你来选</h2>
+          <p class="section-lede">从古巷走向湖山，或把一个下午留给公园。选择你的兴趣，找到旅程的起点；点开照片，还能看见更多细节。</p>
+        </header>
+
+        <div class="filter-bar">
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">全部</button>
+          <button type="button" class="filter-btn" data-filter="heritage" aria-pressed="false">人文古迹</button>
+          <button type="button" class="filter-btn" data-filter="nature" aria-pressed="false">山水自然</button>
+          <button type="button" class="filter-btn" data-filter="family" aria-pressed="false">阖家休闲</button>
+          <p class="filter-count">当前展示 <span data-results-count aria-live="polite">6</span> 个去处</p>
+        </div>
+
+        <div class="place-grid">
+          <article class="place-card" data-place data-category="heritage">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="青果巷"
+                      data-caption="巷中段立着唐荆川宅邸入口的石牌坊；这条巷素称「江南名士第一巷」。">
+                <img src="../assets/changzhou/qingguo-alley.jpg"
+                     alt="青果巷中的石牌坊与白墙黛瓦老宅，石板路尽头可见行人"
+                     loading="lazy" decoding="async" width="1400" height="1050">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--heritage">人文古迹</p>
+            <h3 class="place-name">青果巷</h3>
+            <p class="place-desc">沿南市河铺开的老街巷，白墙黛瓦间散落着名人故居，素称「江南名士第一巷」。</p>
+            <p class="place-meta">老城 · 南市河畔</p>
+          </article>
+
+          <article class="place-card" data-place data-category="heritage">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="天宁寺 · 天宁宝塔"
+                      data-caption="始建于唐代的禅寺，钟声绵延；寺旁宝塔是老城天际线上最醒目的剪影。">
+                <img src="../assets/changzhou/tianning-pagoda.jpg" class="obj-pos-top"
+                     alt="晴空下的天宁宝塔与塔前白色九龙柱"
+                     loading="lazy" decoding="async" width="1276" height="1920">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--heritage">人文古迹</p>
+            <h3 class="place-name">天宁寺</h3>
+            <p class="place-desc">始建于唐代的禅寺，钟声绵延；寺旁天宁宝塔，是今天老城天际线上最醒目的剪影。</p>
+            <p class="place-meta">老城 · 延陵路一带</p>
+          </article>
+
+          <article class="place-card" data-place data-category="nature">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="天目湖"
+                      data-caption="溧阳南部的湖山胜处：湛蓝湖面、环湖葱郁；湖畔以砂锅鱼头与茶香闻名。">
+                <img src="../assets/changzhou/tianmu-lake.jpg"
+                     alt="湛蓝湖面与环湖的葱郁山丘"
+                     loading="lazy" decoding="async" width="1400" height="1050">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--nature">山水自然</p>
+            <h3 class="place-name">天目湖</h3>
+            <p class="place-desc">溧阳南部的湖山胜处：湛蓝湖面、环湖葱郁；湖畔以砂锅鱼头与茶香闻名。</p>
+            <p class="place-meta">溧阳 · 天目湖</p>
+          </article>
+
+          <article class="place-card" data-place data-category="nature">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="南山竹海"
+                      data-caption="溧阳南部群山间的「竹的海洋」：红色地面缆车沿山坡轨道穿行，竹林在两侧铺开。">
+                <img src="../assets/changzhou/nanshan-bamboo.jpg"
+                     alt="竹林山坡间，红色地面缆车沿轨道行进"
+                     loading="lazy" decoding="async" width="1050" height="1400">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--nature">山水自然</p>
+            <h3 class="place-name">南山竹海</h3>
+            <p class="place-desc">溧阳南部群山间的「竹的海洋」：沿步道走进竹林，也可以乘地面缆车感受山间起伏。</p>
+            <p class="place-meta">溧阳 · 南山</p>
+          </article>
+
+          <article class="place-card" data-place data-category="family">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="红梅公园"
+                      data-caption="老城里的园林公园：湖面、步道与园中文笔塔，散步、泛舟、遛娃都合适。">
+                <img src="../assets/changzhou/hongmei-park.jpg"
+                     alt="公园湖面上蜿蜒的白色栏杆步道与垂柳"
+                     loading="lazy" decoding="async" width="1400" height="1050">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--family">阖家休闲</p>
+            <h3 class="place-name">红梅公园</h3>
+            <p class="place-desc">老城里的园林公园：湖面、步道与园中文笔塔，散步、泛舟、遛娃都合适。</p>
+            <p class="place-meta">老城 · 天宁区</p>
+          </article>
+
+          <article class="place-card" data-place data-category="family">
+            <figure class="place-figure" data-tilt>
+              <button type="button" class="lb-trigger" data-lightbox
+                      data-title="文亨桥 · 篦箕巷"
+                      data-caption="桥巷相连的运河岸线：旧时「篦梁灯火」的繁华市井，如今适合傍晚散步、看灯影落水。">
+                <img src="../assets/changzhou/wenheng-bridge.jpg"
+                     alt="青石拱桥横跨水面，桥侧龙头雕刻清晰可见，背景是老城与新楼"
+                     loading="lazy" decoding="async" width="1920" height="1440">
+              </button>
+            </figure>
+            <p class="place-tag place-tag--family">阖家休闲</p>
+            <h3 class="place-name">文亨桥 · 篦箕巷</h3>
+            <p class="place-desc">桥巷相连的运河岸线：旧时「篦梁灯火」的繁华市井，如今适合傍晚散步、看灯影落水。</p>
+            <p class="place-meta">老城 · 运河畔</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 04 · 影像长廊 ===================== -->
+    <section class="section" id="gallery" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">04</span>Gallery · 影像长廊</p>
+          <h2 class="display">把照片摆成墙，也铺成一条河</h2>
+          <p class="section-lede">随滚动，让照片错落起伏；换一种看法，进入自由漫游的相册。电脑可向任意方向拖动，手机左右轻扫，点开照片细看。</p>
+        </header>
+
+        <div class="gallery-modes" role="tablist" aria-label="影像长廊展示方式">
+          <button type="button" class="tab-btn" role="tab" id="gallery-tab-wall"
+                  aria-controls="gallery-panel-wall" aria-selected="true" data-gallery-mode="wall">弹性照片墙</button>
+          <button type="button" class="tab-btn" role="tab" id="gallery-tab-drift"
+                  aria-controls="gallery-panel-drift" aria-selected="false" data-gallery-mode="drift">拖拽画廊</button>
+        </div>
+
+        <div class="gallery-panels">
+          <!-- 模式一：弹性照片墙（三列以不同幅度错动，位移由 hw1_ai.js 写入 --column-shift） -->
+          <div class="gallery-panel wall-panel" id="gallery-panel-wall" role="tabpanel" aria-labelledby="gallery-tab-wall" data-gallery-panel="wall">
+            <div class="gallery-wall">
+              <div class="elastic-col" data-elastic-column data-lag="0.10">
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="青果巷 · 夜色"
+                          data-caption="灯影落在水面上，老城水巷安静下来。">
+                    <img src="../assets/changzhou/qingguo-alley-night.jpg"
+                         alt="暮色里的青果巷水巷，白墙老宅与灯火倒映在水面"
+                         loading="lazy" decoding="async" width="1400" height="1224">
+                  </button>
+                  <figcaption>青果巷 · 夜色</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="天宁寺 · 夜"
+                          data-caption="灯亮起来的寺院，是老城夜里最安稳的光。">
+                    <img src="../assets/changzhou/tianning-temple-night.jpg"
+                         alt="夜晚的天宁寺殿宇，暖色灯光映照山门与石狮"
+                         loading="lazy" decoding="async" width="1400" height="930">
+                  </button>
+                  <figcaption>天宁寺 · 夜</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="文亨桥"
+                          data-caption="运河上的古石桥，桥畔旧时是篦箕铺成市的街巷。">
+                    <img src="../assets/changzhou/wenheng-bridge.jpg"
+                         alt="青石拱桥横跨水面，桥侧龙头雕刻清晰可见，背景是老城与新楼"
+                         loading="lazy" decoding="async" width="1920" height="1440">
+                  </button>
+                  <figcaption>文亨桥 · 篦箕巷</figcaption>
+                </figure>
+              </div>
+
+              <div class="elastic-col" data-elastic-column data-lag="0.18">
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="文笔塔"
+                          data-caption="红梅公园的园中塔，常州文脉的象征。">
+                    <img src="../assets/changzhou/wenbi-pagoda.jpg"
+                         alt="蓝天绿树间矗立的文笔塔，塔下是假山石与游人"
+                         loading="lazy" decoding="async" width="931" height="1400">
+                  </button>
+                  <figcaption>文笔塔 · 红梅公园</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="天目湖 · 天下第一壶"
+                          data-caption="逆光里的巨型紫砂提壶雕塑，壶嘴正流出细水。">
+                    <img src="../assets/changzhou/tianmu-teapot.jpg"
+                         alt="逆光中的巨型紫砂提梁壶雕塑，壶嘴正流出细水"
+                         loading="lazy" decoding="async" width="1400" height="933">
+                  </button>
+                  <figcaption>天下第一壶 · 天目湖</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="京杭大运河 · 常州段"
+                          data-caption="从桥上远眺运河：河面平静，两岸是城市的日常。">
+                    <img src="../assets/changzhou/canal.jpg"
+                         alt="自桥上远眺京杭大运河，河面平静，两岸为城市建筑"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                  <figcaption>京杭大运河 · 常州段</figcaption>
+                </figure>
+              </div>
+
+              <div class="elastic-col" data-elastic-column data-lag="0.26">
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="天目湖"
+                          data-caption="湛蓝湖面，环湖葱郁。">
+                    <img src="../assets/changzhou/tianmu-lake.jpg"
+                         alt="湛蓝湖面与环湖的葱郁山丘"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                  <figcaption>天目湖</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="南山竹海"
+                          data-caption="红色地面缆车沿竹林山坡间的轨道行进。">
+                    <img src="../assets/changzhou/nanshan-bamboo.jpg"
+                         alt="竹林山坡间，红色地面缆车沿轨道行进"
+                         loading="lazy" decoding="async" width="1050" height="1400">
+                  </button>
+                  <figcaption>南山竹海</figcaption>
+                </figure>
+                <figure class="wall-tile">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="红梅公园"
+                          data-caption="湖面、步道与散步的人——老城里的慢角落。">
+                    <img src="../assets/changzhou/hongmei-park.jpg"
+                         alt="公园湖面上蜿蜒的白色栏杆步道与垂柳"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                  <figcaption>红梅公园</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- 模式二：拖拽画廊 —— 原始图块 200%×200%，小图坐标用行内自定义属性给出；
+               hw1_ai.js 会平铺克隆并在四向拖拽时移动图块 -->
+          <div class="gallery-panel" id="gallery-panel-drift" role="tabpanel" aria-labelledby="gallery-tab-drift" data-gallery-panel="drift" hidden>
+            <div class="drift-viewport" data-drift-gallery tabindex="0" role="region"
+                 aria-label="可拖拽的无限照片画廊" aria-describedby="drift-hint">
+              <div class="drift-tile" data-drift-tile>
+                <figure class="drift-figure" style="--x: 5; --y: 7; --w: 23">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="青果巷"
+                          data-caption="巷中段立着唐荆川宅邸入口的石牌坊；这条巷素称「江南名士第一巷」。">
+                    <img src="../assets/changzhou/qingguo-alley.jpg"
+                         alt="青果巷中的石牌坊与白墙黛瓦老宅，石板路尽头可见行人"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 42; --y: 3; --w: 19">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="天宁寺 · 天宁宝塔"
+                          data-caption="始建于唐代的禅寺；宝塔是老城天际线上最醒目的剪影。">
+                    <img src="../assets/changzhou/tianning-pagoda.jpg"
+                         alt="晴空下的天宁宝塔与塔前白色九龙柱"
+                         loading="lazy" decoding="async" width="1276" height="1920">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 72; --y: 9; --w: 21">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="文亨桥"
+                          data-caption="运河上的古石桥，桥畔旧时是篦箕铺成市的街巷。">
+                    <img src="../assets/changzhou/wenheng-bridge.jpg"
+                         alt="青石拱桥横跨水面，桥侧龙头雕刻清晰可见，背景是老城与新楼"
+                         loading="lazy" decoding="async" width="1920" height="1440">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 12; --y: 37; --w: 20">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="红梅公园"
+                          data-caption="湖面、步道与园中文笔塔。">
+                    <img src="../assets/changzhou/hongmei-park.jpg"
+                         alt="公园湖面上蜿蜒的白色栏杆步道与垂柳"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 38; --y: 42; --w: 25">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="天目湖"
+                          data-caption="湛蓝湖面，环湖葱郁。">
+                    <img src="../assets/changzhou/tianmu-lake.jpg"
+                         alt="湛蓝湖面与环湖的葱郁山丘"
+                         loading="lazy" decoding="async" width="1400" height="1050">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 8; --y: 70; --w: 18">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="南山竹海"
+                          data-caption="竹林夹道，红色地面缆车沿山坡轨道缓缓行进。">
+                    <img src="../assets/changzhou/nanshan-bamboo.jpg"
+                         alt="竹林山坡间，红色地面缆车沿轨道行进"
+                         loading="lazy" decoding="async" width="1050" height="1400">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 41; --y: 68; --w: 19">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="文笔塔"
+                          data-caption="红梅公园的园中塔，常州文脉的象征。">
+                    <img src="../assets/changzhou/wenbi-pagoda.jpg"
+                         alt="蓝天绿树间矗立的文笔塔，塔下是假山石与游人"
+                         loading="lazy" decoding="async" width="931" height="1400">
+                  </button>
+                </figure>
+                <figure class="drift-figure" style="--x: 70; --y: 40; --w: 22">
+                  <button type="button" class="lb-trigger" data-lightbox
+                          data-title="南市河"
+                          data-caption="沿河的白墙老屋与垂柳，远处高楼映在水面。">
+                    <img src="../assets/changzhou/nanshi-river.jpg"
+                         alt="白墙民居与垂柳沿南市河排开，远处高楼倒映在平静水面"
+                         loading="lazy" decoding="async" width="1920" height="1440">
+                  </button>
+                </figure>
+              </div>
+            </div>
+
+            <div class="drift-toolbar">
+              <p class="drift-hint" id="drift-hint">按住拖动平移 · 方向键移动 · Home 复位 · 滚轮照常滚动页面</p>
+              <div class="drift-actions">
+                <button type="button" class="ghost-btn" data-drift-toggle aria-pressed="false">
+                  <span class="when-on">暂停漂移</span><span class="when-off">开始漂移</span>
+                </button>
+                <button type="button" class="ghost-btn" data-drift-reset>回到原位</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 05 · 味道与手艺 ===================== -->
+    <section class="section" id="flavor" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">05</span>Flavor · 味道与手艺</p>
+          <h2 class="display">一城风味，藏在日常里</h2>
+          <p class="section-lede">酥香的茶食、热汤里的细面、湖畔的一锅鲜，再到一梳一绣的手艺。循着味道与匠心，读懂常州。</p>
+        </header>
+
+        <h3 class="flavor-subhead">三样吃食</h3>
+        <div class="flavor-grid flavor-grid--food">
+          <article class="flavor-card">
+            <h4 class="flavor-vname">大麻糕</h4>
+            <div class="flavor-body">
+              <p class="flavor-roman">DAMAGAO</p>
+              <p class="flavor-desc">常州的茶食代表：芝麻铺面、外皮层层起酥，甜咸皆有，配茶正好。</p>
+              <p class="flavor-meta">关键词：酥 · 香 · 芝麻</p>
+            </div>
+          </article>
+          <article class="flavor-card">
+            <h4 class="flavor-vname">银丝面</h4>
+            <div class="flavor-body">
+              <p class="flavor-roman">YINSI MIAN</p>
+              <p class="flavor-desc">面条细白如丝，汤清而面韧；老常州的清晨，常常从一碗银丝面开始。</p>
+              <p class="flavor-meta">关键词：细 · 韧 · 清汤</p>
+            </div>
+          </article>
+          <article class="flavor-card">
+            <h4 class="flavor-vname">砂锅鱼头</h4>
+            <div class="flavor-body">
+              <p class="flavor-roman">SHAGUO YUTOU</p>
+              <p class="flavor-desc">天目湖的名菜：湖中鳙鱼头入砂锅慢炖，汤色乳白，鲜而不腻。</p>
+              <p class="flavor-meta">关键词：鲜 · 醇 · 慢炖</p>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="flavor-subhead">两门手艺</h3>
+        <div class="flavor-grid flavor-grid--craft">
+          <article class="flavor-card flavor-card--craft">
+            <h4 class="flavor-vname">梳篦</h4>
+            <div class="flavor-body">
+              <p class="flavor-roman">COMBS OF CHANGZHOU</p>
+              <p class="flavor-desc">素有「宫梳名篦」之誉：从选料到雕绘，一层层手工功夫；旧时篦箕巷沿河铺肆成市，与梳篦渊源颇深。</p>
+              <p class="flavor-meta">关键词：木 · 竹 · 雕绘</p>
+            </div>
+          </article>
+          <article class="flavor-card flavor-card--craft">
+            <h4 class="flavor-vname">乱针绣</h4>
+            <div class="flavor-body">
+              <p class="flavor-roman">RANDOM-STITCH EMBROIDERY</p>
+              <p class="flavor-desc">由常州刺绣艺术家杨守玉创立：长短不一的丝线交叉叠合，借鉴绘画的光色与层次，以针作笔、以线作画。</p>
+              <p class="flavor-meta">关键词：丝线 · 光色 · 交叠</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="flavor-note">从一顿早餐到一件手作，把常州的日常带进旅程。文字资料见文末来源。</p>
+      </div>
+    </section>
+
+    <!-- ===================== 06 · 路线 ===================== -->
+    <section class="section" id="routes" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">06</span>Routes · 路线建议</p>
+          <h2 class="display">两条路线：老城步行，溧阳看山</h2>
+          <p class="section-lede">老城的景点可以连成一条步行线；溧阳的湖山在另一头，值得单独安排。时长只是建议，请按自己的节奏来。</p>
+        </header>
+
+        <div class="route-tabs" role="tablist" aria-label="路线选择">
+          <button type="button" class="tab-btn" role="tab" id="route-tab-city"
+                  aria-controls="route-panel-city" aria-selected="true" data-route-select="city">老城步行线</button>
+          <button type="button" class="tab-btn" role="tab" id="route-tab-lake"
+                  aria-controls="route-panel-lake" aria-selected="false" data-route-select="lake">溧阳山水线</button>
+        </div>
+
+        <div class="route-panel" id="route-panel-city" role="tabpanel" aria-labelledby="route-tab-city" data-route-panel="city">
+          <h3 class="route-panel-title">老城步行线 · 三站</h3>
+          <ol class="route-stops">
+            <li>
+              <span class="route-stop-name">青果巷 · 上午</span>
+              <p class="route-stop-desc">沿南市河慢走，看老宅门楣与水埠头，上午光线柔和。</p>
+            </li>
+            <li>
+              <span class="route-stop-name">天宁寺 · 午前午后</span>
+              <p class="route-stop-desc">从青果巷步行可达；在塔院听钟，看宝塔立在老城天际线上。</p>
+            </li>
+            <li>
+              <span class="route-stop-name">红梅公园 · 傍晚</span>
+              <p class="route-stop-desc">以红梅阁、文笔塔闻名的园林，收尾在湖边散步。</p>
+            </li>
+          </ol>
+          <p class="route-note">建议时长：半天至一天。三处都在老城，彼此不远，步行或短途骑行皆可。</p>
+        </div>
+
+        <div class="route-panel" id="route-panel-lake" role="tabpanel" aria-labelledby="route-tab-lake" data-route-panel="lake" hidden>
+          <h3 class="route-panel-title">溧阳山水线 · 两站</h3>
+          <ol class="route-stops">
+            <li>
+              <span class="route-stop-name">天目湖 · 上午</span>
+              <p class="route-stop-desc">溧阳的湖山胜处；湖畔尝一锅砂锅鱼头，再去湖边吹风。</p>
+            </li>
+            <li>
+              <span class="route-stop-name">南山竹海 · 下午</span>
+              <p class="route-stop-desc">与天目湖同在溧阳南部，竹林步道清凉，适合再留半天。</p>
+            </li>
+          </ol>
+          <p class="route-note">建议时长：一天以上。两地在溧阳境内，与老城景点不在同一条步行线上，建议单独安排。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 07 · 影音 ===================== -->
+    <section class="section" id="media" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">07</span>Media · 影音角</p>
+          <h2 class="display">听一听，也看一看</h2>
+          <p class="section-lede">都可以点开播放，但页面不会自动出声。</p>
+        </header>
+
+        <div class="media-grid">
+          <figure class="media-card">
+            <span class="media-chip">摄影放映</span>
+            <video controls preload="metadata"
+                   poster="../assets/changzhou/changzhou-film-poster.jpg"
+                   width="1280" height="720">
+              <source src="../assets/changzhou/changzhou-film.mp4" type="video/mp4">
+              <p>你的浏览器不支持视频播放，可以<a href="../assets/changzhou/changzhou-film.mp4">直接打开或下载短片</a>观看。</p>
+            </video>
+            <figcaption>摄影放映《常州 · 江南老城与溧阳山水》：由静态照片合成的短片（约 23 秒），含合成语音导览（Microsoft Huihui）；不是实拍影像。</figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <span class="media-chip">合成语音</span>
+            <audio controls preload="metadata" src="../assets/changzhou/changzhou-guide.mp3">
+              <p>你的浏览器不支持音频播放，可以<a href="../assets/changzhou/changzhou-guide.mp3">直接打开或下载音频</a>。</p>
+            </audio>
+            <figcaption>合成语音导览《看城 · 看山水》（约 21 秒）：由 Microsoft Huihui 合成语音朗读，并非现场录音。</figcaption>
+          </figure>
+        </div>
+
+        <p class="media-note">两段影音均使用浏览器原生控件，不自动播放。</p>
+      </div>
+    </section>
+
+    <!-- ===================== 08 · 来源与说明 ===================== -->
+    <section class="section" data-reveal>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="overline"><span class="overline-num">08</span>Sources · 资料来源</p>
+          <h2 class="display">这些内容从哪里来</h2>
+          <p class="section-lede">页面里用到的图片、影音和文字资料，都在这里交代清楚。</p>
+        </header>
+
+        <details class="sources-box" id="sources">
+          <summary>图片、影音与文字资料清单</summary>
+          <ul class="sources-list">
+            <li>青果巷与「江南名士第一巷」相关报道：<a href="https://jsnews.jschina.com.cn/cz/a/202302/t20230210_3160937.shtml" target="_blank" rel="noopener noreferrer">江苏新闻网</a></li>
+            <li>常州梳篦传统工艺介绍：<a href="https://fzg.changzhou.gov.cn/html/fzg/2020/NLHQODQE_0924/33601.html" target="_blank" rel="noopener noreferrer">常州市地方志办公室</a></li>
+            <li>杨守玉与乱针绣：<a href="https://fzg.changzhou.gov.cn/html/fzg/2016/NPHOOFQJ_0829/32487.html" target="_blank" rel="noopener noreferrer">常州史志</a></li>
+            <li>天目湖与溧阳山水介绍：<a href="https://www.changzhou.gov.cn/ns_news/307811928476156" target="_blank" rel="noopener noreferrer">常州市人民政府门户网站</a></li>
+            <li>常州老字号与风味（银丝面、大麻糕等）：<a href="https://swj.changzhou.gov.cn/html/swj/2026/IMDOOPEA_0710/21818.html" target="_blank" rel="noopener noreferrer">常州市商务局</a></li>
+            <li>图片署名（逐张；许可均为 CC BY-SA 4.0，已按原图缩放 / 裁剪并重编码，改动明细见<a href="../assets/changzhou/manifest.json" target="_blank" rel="noopener">素材清单</a>）：
+              <ul class="sources-credits">
+                <li>青果巷 · 唐荆川宅入口（qingguo-alley.jpg）— 摄影：MNXANL — <a href="https://commons.wikimedia.org/wiki/File%3A201907_Entrance_of_the_Tang_Jingchuan%27s_Residence_on_Qingguo_Lane%2C_Changzhou.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>青果巷夜色（qingguo-alley-night.jpg）— 摄影：MNXANL — <a href="https://commons.wikimedia.org/wiki/File%3A201610_Qingguo_Alley_at_nigh.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>南市河 · 常州老城（nanshi-river.jpg）— 摄影：MNXANL — <a href="https://commons.wikimedia.org/wiki/File%3A201907_Views_from_Nanshi_River.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>天宁宝塔（tianning-pagoda.jpg）— 摄影：Jakub Hałun — <a href="https://commons.wikimedia.org/wiki/File%3A20090919_Changzhou_Tianning_Temple_Pagoda_5223.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>天宁寺夜色（tianning-temple-night.jpg）— 摄影：MNXANL — <a href="https://commons.wikimedia.org/wiki/File%3A201610_Tianning_Temple%2C_Changzhou.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>红梅公园（hongmei-park.jpg）— 摄影：Slyronit — <a href="https://commons.wikimedia.org/wiki/File%3AHongmei_Park%2C_Changzhou.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>文笔塔（wenbi-pagoda.jpg）— 摄影：Jakub Hałun — <a href="https://commons.wikimedia.org/wiki/File%3A20090919_Changzhou_Wenbi_Pagoda_5429.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>京杭大运河常州段（canal.jpg）— 摄影：Fumikas Sagisavas — <a href="https://commons.wikimedia.org/wiki/File%3ABeijing-Hangzhou_Grand_Canal_in_CZ.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>文亨桥（wenheng-bridge.jpg）— 摄影：Vesekskiy — <a href="https://commons.wikimedia.org/wiki/File%3AWenheng_Bridge_20260822.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>天目湖（tianmu-lake.jpg）— 摄影：William Ng — <a href="https://commons.wikimedia.org/wiki/File%3ATianmu_Lake_20180625.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>天目湖 · 天下第一壶（tianmu-teapot.jpg）— 摄影：深鸣 — <a href="https://commons.wikimedia.org/wiki/File%3A%E5%A4%A9%E7%9B%AE%E6%B9%96%E2%80%9C%E5%A4%A9%E4%B8%8B%E7%AC%AC%E4%B8%80%E5%A3%B6%E2%80%9D.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+                <li>南山竹海 · 缆车（nanshan-bamboo.jpg）— 摄影：William Ng — <a href="https://commons.wikimedia.org/wiki/File%3A%E6%BA%A7%E9%98%B3%E5%8D%97%E5%B1%B1%E7%AB%B9%E6%B5%B7%E7%9A%84%E7%BC%86%E8%BD%A6_20180625.jpg" target="_blank" rel="noopener noreferrer">来源页</a></li>
+              </ul>
+              以上图片按 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0「署名 — 相同方式共享」</a>使用：保留作者署名与许可名称；对本页图片的衍生使用须以相同方式共享。
+            </li>
+            <li>影音素材：摄影放映短片《常州 · 江南老城与溧阳山水》由本页 7 张照片合成（青果巷、南市河、天宁宝塔、天宁寺夜色、文亨桥、天目湖、南山竹海），是相应照片的 CC BY-SA 4.0 衍生作品（静态照片制作，非实拍影像），合成语音 Microsoft Huihui（zh-CN）、音轨随片；独立音频《看城 · 看山水》为项目自制合成语音，无第三方素材。明细见 manifest 的 video / audio 字段。</li>
+          </ul>
+          <p class="sources-meta">本页为课程作业演示：文字为概述性介绍，未引用具体统计数字；引用链接均指向公开网页。</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== 页脚 ===================== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="footer-brand">常州 · 龙城</p>
+      <p class="footer-declare">本页为「网页设计」课程作业「我的家乡名片」的 AI 辅助版（学号 202511680488），以江苏省常州市为家乡设定，不代表官方旅游网站。内容与素材来源见本页清单，提示词与采纳记录见 promptlog 页面。</p>
+      <ul class="footer-links">
+        <li><a href="../promptlog.html">AI 提示词记录（promptlog）</a></li>
+        <li><a href="../index.html">返回站点首页</a></li>
+        <li><a href="#home">回到页面顶部</a></li>
+      </ul>
+      <p class="footer-meta">
+        <span>静态页面 · 无外部依赖</span>
+        <span>图片 CC BY-SA 4.0 · 逐张署名与清单见「来源与说明」</span>
+        <span>写于 2026 年 · 网页设计课程</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===================== 大图查看器 ===================== -->
+  <dialog class="photo-viewer" id="photo-viewer" aria-label="照片查看">
+    <div class="viewer">
+      <div class="viewer-top">
+        <p class="viewer-counter" data-lightbox-counter>— / —</p>
+        <button type="button" class="viewer-btn" data-lightbox-close aria-label="关闭照片查看">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="viewer-body">
+        <button type="button" class="viewer-nav" data-lightbox-prev aria-label="上一张照片">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M14.5 4.5 7 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <figure class="viewer-stage">
+          <img id="lightbox-image" alt="">
+        </figure>
+
+        <button type="button" class="viewer-nav" data-lightbox-next aria-label="下一张照片">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M9.5 4.5 17 12l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="viewer-bottom">
+        <p class="viewer-caption" id="lightbox-caption"></p>
+        <div class="viewer-zoom">
+          <button type="button" class="viewer-btn" data-lightbox-zoom-out aria-label="缩小" disabled>−</button>
+          <button type="button" class="viewer-btn" data-lightbox-zoom-in aria-label="放大">+</button>
+          <button type="button" class="viewer-btn" data-lightbox-reset aria-label="恢复原始大小" disabled>1:1</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <a class="back-top" data-back-top href="#home" aria-label="回到页面顶部">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 19V6M6.5 11 12 5.5 17.5 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</body>
+</html>

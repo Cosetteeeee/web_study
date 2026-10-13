@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字钟</title>
+    <script type="text/JavaScript">
+          function Eclock(){
+            var MyDate2=new Date()
+      var MyTime2=MyDate2.getTime()
+      var TimeString2='时钟： '+MyDate2.getHours()+'时'+MyDate2.getMinutes()+'分'+MyDate2.getSeconds()+'秒'
+      var MyHours3=0;MyMinutes3=0
+      var MySeconds4=Math.round((MyTime2-MyTime1)/1000)
+      MyHours3=Math.round((MySeconds4-1800)/3600)
+      MyMinutes3=Math.round(((MySeconds4-30)%3600)/60)
+      if(MyMinutes3==60)
+         MyMinutes3=0
+      MySeconds4=Math.round(MySeconds4%3600)
+      MySeconds3=Math.round(MySeconds4%60)
+      var TimeString3='页面持续时间是：'+MyHours3+'时'+MyMinutes3+'分'+MySeconds3+'秒'
+      Clock.innerHTML=TimeString2+'<p>'+TimeString3
+      setTimeout("Eclock()",1000)
+          }
+    </script>
+  </head>
+  <body>
+    <h2>
+      <font color="green" face="楷体">
+        <script language="Javascript">
+          var MyDate1 = new Date();
+          var MyHours1 = MyDate1.getHours();
+          var MyMinutes1 = MyDate1.getMinutes();
+          var MySeconds1 = MyDate1.getSeconds();
+          var MyTime1 = MyDate1.getTime();
+          document.write(
+            "网页下载的时间是： ",
+            MyDate1.getYear() + 1900,
+            "年",
+            MyDate1.getMonth() + 1,
+            "月",
+            MyDate1.getDate(),
+            "日",
+            MyDate1.getHours(),
+            "时",
+            MyDate1.getMinutes(),
+            "分",
+            MyDate1.getSeconds(),
+            "秒",
+          );
+        </script>
+      </font>
+    </h2>
+    <div
+      id="Clock"
+      style="
+        position: absolute;
+        left: 150;
+        top: 150;
+        font-family: &quot;楷体&quot;;
+        font-size: 30;
+        color: #0000ff;
+      "
+      onclick="Eclock()"
+    >
+      单击 启动数字钟并统计网页持续时间
+    </div>
+  </body>
+</html>

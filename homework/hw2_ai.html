@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--
+  hw2_ai.html —— 天坛｜传承 · 保护 · 公众使用（AI 版）
+  课程作业：网页设计 · 课堂任务 2「有鼠标交互效果的网页」｜ 学号 202511680488
+  纯 HTML + CSS：无 JavaScript、无框架、无 CDN、无外部字体；样式见 ./hw2_ai.css。
+  信息分层：
+    第 1 层 —— 概览、轴线建筑名录、三张主题卡片（照片 + 标题 + 一句话摘要）、折叠的资料来源；
+    第 2 层 —— 鼠标悬停 / 键盘 Tab 聚焦 / 触屏点按（原生 checkbox 与 details，无脚本）
+               展开的建筑照片、简介、主题事实与来源链接。
+  提示词与采纳记录见 ../promptlog.html，建设记录见 ../websitelog.html。
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天坛 ｜ 传承 · 保护 · 公众使用 ｜ 网页设计任务 2（AI 版）</title>
+  <meta name="description" content="纯 HTML + CSS 分层交互网页：北京天坛（始建于 1420 年的明清皇家祭天建筑群，1998 年列入《世界遗产名录》）概览、南北轴线建筑巡礼，以及传承、保护、公众使用的现状。">
+  <link rel="stylesheet" href="./hw2_ai.css">
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#overview">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <p class="brand"><a href="#top">天坛<span class="brand-en" lang="en">Temple of Heaven</span></a></p>
+      <nav class="site-nav" aria-label="页面目录">
+        <ul>
+          <li><a href="#overview">概览</a></li>
+          <li><a href="#architecture">建筑巡礼</a></li>
+          <li><a href="#heritage">传承 · 保护 · 公众使用</a></li>
+          <li><a href="#sources">资料来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 第 1 层 · 概览 ============ -->
+    <section id="overview" class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">北京 · 明清皇家祭坛 <span lang="en">World Heritage · Beijing</span></p>
+          <div class="hero-title">
+            <h1>天坛</h1>
+            <span class="seal" aria-hidden="true">天<br>坛</span>
+          </div>
+          <p class="hero-sub">明清两代皇帝祭天、祈谷的坛庙建筑群</p>
+          <p class="lead">天坛位于北京老城东南，始建于明永乐十八年（1420 年），坛域占地约 273 公顷。祈年殿、皇穹宇、圜丘沿内坛南北轴线布置，古柏环抱之间，集中体现了中国古代“天圆地方”的宇宙观与祭天礼制。1998 年，天坛以“北京皇家祭坛——天坛”列入<a class="inline-link" href="https://whc.unesco.org/en/list/881/">联合国教科文组织《世界遗产名录》</a>。</p>
+          <dl class="fact-row">
+            <div class="fact"><dt>始建</dt><dd>1420 年（明永乐十八年）</dd></div>
+            <div class="fact"><dt>坛域</dt><dd>约 273 公顷</dd></div>
+            <div class="fact"><dt>全国重点文物保护单位</dt><dd>1961 年 · 第一批</dd></div>
+            <div class="fact"><dt>世界遗产名录</dt><dd>1998 年列入</dd></div>
+          </dl>
+          <p class="entry-links">
+            <a href="#architecture">建筑巡礼</a>
+            <a href="#heritage">传承 · 保护 · 公众使用</a>
+            <a href="#sources">资料来源</a>
+          </p>
+        </div>
+        <figure class="hero-media">
+          <img src="../assets/tiantan/prayer-winter.jpg" width="1920" height="1280" fetchpriority="high"
+               alt="冬日里的祈年殿近景：仰视三重檐圆殿，灰白天空下，层层檐下的彩绘梁枋与蓝色匾额清晰可见">
+          <figcaption><span>祈年殿 · 冬日</span><span class="credit">照片 © Lloyd Tudor · CC BY-SA 4.0</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ 第 1 层 · 建筑巡礼（悬停 / 聚焦 / 点按展开第 2 层） ============ -->
+    <section id="architecture" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">建筑巡礼 <span lang="en">Along the Axis</span></p>
+          <h2>一条轴线上的三组建筑</h2>
+          <p class="section-lead">内坛建筑沿南北轴线布置：南端是祭天的圜丘，其正北为皇穹宇，北端祈谷坛上矗立祈年殿，两坛之间由抬高的神道——丹陛桥相连。将鼠标悬停于建筑名称、用 Tab 键聚焦，或直接点按，即可查看照片与第二层介绍。</p>
+        </header>
+
+        <div class="arch-explorer">
+
+          <div class="arch-item" id="arch-prayer">
+            <input class="toggle-input arch-toggle" type="checkbox" id="toggle-prayer" aria-label="展开或收起祈年殿的照片与介绍">
+            <label class="arch-trigger" for="toggle-prayer">
+              <span class="arch-name"><span class="arch-name-text">祈年殿</span><span class="arch-en" lang="en">Hall of Prayer for Good Harvests</span></span>
+              <span class="arch-role">北端 · 祈谷坛的中心建筑</span>
+              <span class="arch-hint">悬停 / 点按查看图文<i class="arch-chevron" aria-hidden="true"></i></span>
+            </label>
+            <div class="arch-panel">
+              <div class="panel-inner">
+                <img src="../assets/tiantan/prayer-sky.jpg" width="1280" height="806" loading="lazy" decoding="async"
+                     alt="晴天下的祈年殿全景：蓝色琉璃瓦三重檐圆殿立于三层汉白玉台基之上，台基上有游客参观">
+                <div class="panel-caption">
+                  <p class="panel-title">祈年殿 · 祈谷坛中心</p>
+                  <p>三重檐圆形大殿坐落在三层汉白玉台基之上，上覆蓝色琉璃瓦，是明清皇帝祈求五谷丰登的场所，也是天坛最广为人知的形象。</p>
+                  <p class="panel-credit">照片 © xiquinhosilva · CC BY 2.0 · 授权详情见页末「资料来源」</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-item" id="arch-vault">
+            <input class="toggle-input arch-toggle" type="checkbox" id="toggle-vault" aria-label="展开或收起皇穹宇的照片与介绍">
+            <label class="arch-trigger" for="toggle-vault">
+              <span class="arch-name"><span class="arch-name-text">皇穹宇</span><span class="arch-en" lang="en">Imperial Vault of Heaven</span></span>
+              <span class="arch-role">圜丘正北 · 供奉神版的圆形殿宇</span>
+              <span class="arch-hint">悬停 / 点按查看图文<i class="arch-chevron" aria-hidden="true"></i></span>
+            </label>
+            <div class="arch-panel">
+              <div class="panel-inner">
+                <img src="../assets/tiantan/imperial-vault.jpg" width="1280" height="853" loading="lazy" decoding="async"
+                     alt="皇穹宇：蓝色琉璃瓦的圆形单檐殿宇，屋顶在蓝天下呈对称构图">
+                <div class="panel-caption">
+                  <p class="panel-title">皇穹宇 · 圜丘正北</p>
+                  <p>单檐圆形殿宇，立于汉白玉台基之上，平日供奉“皇天上帝”神版；殿宇院落的圆形围墙，就是人们常说的“回音壁”。</p>
+                  <p class="panel-credit">照片 © xiquinhosilva · CC BY 2.0 · 授权详情见页末「资料来源」</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-item" id="arch-altar">
+            <input class="toggle-input arch-toggle" type="checkbox" id="toggle-altar" aria-label="展开或收起圜丘的照片与介绍">
+            <label class="arch-trigger" for="toggle-altar">
+              <span class="arch-name"><span class="arch-name-text">圜丘</span><span class="arch-en" lang="en">Circular Mound Altar</span></span>
+              <span class="arch-role">南端 · 冬至祭天的露天石台</span>
+              <span class="arch-hint">悬停 / 点按查看图文<i class="arch-chevron" aria-hidden="true"></i></span>
+            </label>
+            <div class="arch-panel">
+              <div class="panel-inner">
+                <img src="../assets/tiantan/circular-altar.jpg" width="1280" height="853" loading="lazy" decoding="async"
+                     alt="圜丘坛：汉白玉栏杆环绕的圆形石台台面，远处是柏树林与蓝天">
+                <div class="panel-caption">
+                  <p class="panel-title">圜丘 · 内坛南端</p>
+                  <p>三层圆形露天石台，四周环以汉白玉栏杆，是明清皇帝于冬至举行祭天大典的场所，与北端祈年殿遥相呼应。</p>
+                  <p class="panel-credit">照片 © xiquinhosilva · CC BY 2.0 · 授权详情见页末「资料来源」</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-stage" aria-hidden="true">
+            <div class="stage-hint">
+              <p class="stage-title">内坛南北轴线 · 三组建筑</p>
+              <p>这一区域将显示所选建筑的照片与介绍。将鼠标悬停于左侧建筑名称，或用 Tab 键聚焦、直接点按名称即可查看；再次点按可收起。</p>
+              <p class="stage-note">轴线布局为示意，非测绘地图</p>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="arch-note">注：轴线与建筑相对位置为示意，非测绘地图。建筑与布局事实整理自北京市文物局与联合国教科文组织世界遗产中心公开资料。</p>
+      </div>
+    </section>
+
+    <!-- ============ 第 1 层 · 三张主题卡片（悬停 / 聚焦 / 点按展开第 2 层） ============ -->
+    <section id="heritage" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">传承 · 保护 · 公众使用 <span lang="en">Living Heritage</span></p>
+          <h2>从皇家祭坛，到活着的遗产</h2>
+          <p class="section-lead">六百年坛庙如何延续至今？第一层是三张主题卡片：照片、标题与一句话摘要。悬停、用 Tab 键聚焦，或点按「展开详情」，即可查看第二层的事实与来源链接。</p>
+        </header>
+
+        <div class="heritage-grid">
+
+          <article class="heritage-card" id="card-transmission">
+            <input class="toggle-input heritage-toggle" type="checkbox" id="toggle-transmission" aria-label="展开或收起「传承」主题的详细内容">
+            <figure class="heritage-media">
+              <img src="../assets/tiantan/imperial-vault.jpg" width="1280" height="853" loading="lazy" decoding="async"
+                   alt="皇穹宇蓝色琉璃瓦圆形屋顶特写，在蓝天映衬下呈对称构图">
+              <figcaption class="media-credit">配图：皇穹宇 © xiquinhosilva · CC BY 2.0</figcaption>
+            </figure>
+            <div class="heritage-body">
+              <h3><span class="heritage-marker" aria-hidden="true">壹</span>传承</h3>
+              <p class="heritage-abstract">中和韶乐——从皇家祭天礼乐，到国家级非遗的活态传习。</p>
+              <div class="heritage-detail">
+                <div class="detail-inner">
+                  <p><a class="inline-link" href="https://www.ihchina.cn/project_details/23466.html">中和韶乐</a>是皇家祭祀典礼中使用的礼乐，融礼、乐、歌、舞于一体；所用乐器按金、石、丝、竹、匏、土、革、木“八音”材质分为 16 种。2021 年，“天坛神乐署中和韶乐”列入第五批国家级非物质文化遗产代表性项目名录（传统音乐类），保护单位为北京市天坛公园管理处。</p>
+                  <p>这一礼乐如今不再依托宫廷祭祀延续，而由神乐署雅乐中心（雅乐团）以专门队伍传习。2026 年 2 月 10 日，<a class="inline-link" href="https://www.tiantanpark.cn/park_mews2/detail/1484.html">神乐署</a>重新开放并推出“天坛神乐署中和韶乐展”，设“华夏正声”“八音克谐”“八佾起舞”“合乐节奏”四个主题，结合互动展项介绍礼乐文化。</p>
+                  <p class="detail-links">来源：
+                    <a class="inline-link" href="https://www.ihchina.cn/project_details/23466.html">中国非物质文化遗产网 · 项目页</a>、
+                    <a class="inline-link" href="https://www.tiantanpark.cn/park_mews2/detail/1484.html">天坛公园 · 神乐署展讯（2026 年 2 月）</a>
+                  </p>
+                </div>
+              </div>
+              <label class="heritage-more" for="toggle-transmission">
+                <span class="more-open">展开详情</span><span class="more-close">收起详情</span><i class="more-icon" aria-hidden="true"></i>
+              </label>
+            </div>
+          </article>
+
+          <article class="heritage-card" id="card-conservation">
+            <input class="toggle-input heritage-toggle" type="checkbox" id="toggle-conservation" aria-label="展开或收起「保护」主题的详细内容">
+            <figure class="heritage-media">
+              <img src="../assets/tiantan/stone-detail.jpg" width="1280" height="853" loading="lazy" decoding="async"
+                   alt="天坛汉白玉望柱头特写：高浮雕云龙纹饰，背景石栏渐次虚化">
+              <figcaption class="media-credit">配图：石柱雕饰 © William Lung-mun Johnson · CC BY-SA 4.0</figcaption>
+            </figure>
+            <div class="heritage-body">
+              <h3><span class="heritage-marker" aria-hidden="true">贰</span>保护</h3>
+              <p class="heritage-abstract">从首批全国重点文物保护单位，到三维扫描留存的数字档案。</p>
+              <div class="heritage-detail">
+                <div class="detail-inner">
+                  <p>1961 年，天坛被列为第一批全国重点文物保护单位；1998 年以“北京皇家祭坛——天坛”列入联合国教科文组织《世界遗产名录》。</p>
+                  <p>据 2025 年 7 月公开报道，天坛正以<a class="inline-link" href="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202507/t20250728_4159583.html">三维扫描</a>为古建筑建立记录档案，对圜丘建筑群开展数据可视化采集，并推进中和韶乐的数字化记录与可移动文物保护；日常保护还包括古建修缮、遗产监测与古树名木养护。</p>
+                  <p class="detail-links">来源：
+                    <a class="inline-link" href="https://wwj.beijing.gov.cn/bjww/362771/362778/364353/index.html">北京市文物局 · 天坛</a>、
+                    <a class="inline-link" href="https://whc.unesco.org/en/list/881/">UNESCO 世界遗产中心</a>、
+                    <a class="inline-link" href="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202507/t20250728_4159583.html">首都之窗报道（2025-07-28）</a>
+                  </p>
+                </div>
+              </div>
+              <label class="heritage-more" for="toggle-conservation">
+                <span class="more-open">展开详情</span><span class="more-close">收起详情</span><i class="more-icon" aria-hidden="true"></i>
+              </label>
+            </div>
+          </article>
+
+          <article class="heritage-card" id="card-public-use">
+            <input class="toggle-input heritage-toggle" type="checkbox" id="toggle-public-use" aria-label="展开或收起「公众使用」主题的详细内容">
+            <figure class="heritage-media">
+              <img src="../assets/tiantan/corridor.jpg" width="1280" height="960" loading="lazy" decoding="async"
+                   alt="七十二长廊：绿瓦红柱的长廊延伸向远方，廊内坐着休憩的游客">
+              <figcaption class="media-credit">配图：七十二长廊 © 钉钉 · CC BY-SA 4.0</figcaption>
+            </figure>
+            <div class="heritage-body">
+              <h3><span class="heritage-marker" aria-hidden="true">叁</span>公众使用</h3>
+              <p class="heritage-abstract">从皇家祭坛到城市公园——花展、非遗展演、科普与 AR 文创。</p>
+              <div class="heritage-detail">
+                <div class="detail-inner">
+                  <p>如今的天坛既是世界文化遗产，也是市民晨练、休闲的城市公园。据 2025 年 7 月公开报道，园内结合古建、古树与观鸟资源举办花展、非遗展演与科普活动，并推出<a class="inline-link" href="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202507/t20250728_4159583.html">“智慧天坛科普创意教具展”</a>。</p>
+                  <p>园方还以 AR 等新技术开发文创产品，让祭天文化以可感可知的新媒介走近公众——在保护文物的前提下服务公众，正是遗产“利用”的题中之义。</p>
+                  <p class="detail-links">来源：
+                    <a class="inline-link" href="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202507/t20250728_4159583.html">首都之窗报道（2025-07-28）</a>
+                  </p>
+                </div>
+              </div>
+              <label class="heritage-more" for="toggle-public-use">
+                <span class="more-open">展开详情</span><span class="more-close">收起详情</span><i class="more-icon" aria-hidden="true"></i>
+              </label>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 第 1 层 · 资料来源（原生 details，默认折叠） ============ -->
+    <section id="sources" class="section">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">资料来源与授权 <span lang="en">Sources &amp; Credits</span></p>
+          <h2>资料来源与照片授权</h2>
+          <p class="section-lead">事实均整理自 2025—2026 年公开资料，发布日期以来源页面为准；照片为 Wikimedia Commons 授权摄影作品，逐张署名如下。</p>
+        </header>
+
+        <details class="source-details" id="source-details">
+          <summary><span class="summary-text">展开：事实资料 · 交互灵感 · 照片授权</span><i class="summary-icon" aria-hidden="true"></i></summary>
+          <div class="source-body">
+
+            <section class="source-group" aria-labelledby="src-facts-h">
+              <h3 id="src-facts-h">事实资料</h3>
+              <ol class="source-list">
+                <li>北京市文物局「文博数据 · 北京地区世界文化遗产」：《天坛》——始建年代、坛域范围与代表建筑。<a class="inline-link" href="https://wwj.beijing.gov.cn/bjww/362771/362778/364353/index.html">wwj.beijing.gov.cn</a></li>
+                <li>联合国教科文组织世界遗产中心：《Temple of Heaven: an Imperial Sacrificial Altar in Beijing》（名录第 881 号）——轴线布局、1961 年与 1998 年保护状况。<a class="inline-link" href="https://whc.unesco.org/en/list/881/">whc.unesco.org/en/list/881</a></li>
+                <li>中国非物质文化遗产网：《天坛神乐署中和韶乐》——2021 年第五批国家级非物质文化遗产、“八音”16 种乐器与传承保护单位。<a class="inline-link" href="https://www.ihchina.cn/project_details/23466.html">ihchina.cn</a></li>
+                <li>首都之窗（2025-07-28）：天坛三维扫描建档、圜丘建筑群数据可视化采集、中和韶乐数字化记录与公众文化活动报道。<a class="inline-link" href="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202507/t20250728_4159583.html">beijing.gov.cn</a></li>
+                <li>天坛公园官方网站（2026-02-11）：神乐署重新开放暨“天坛神乐署中和韶乐展”展讯。<a class="inline-link" href="https://www.tiantanpark.cn/park_mews2/detail/1484.html">tiantanpark.cn</a></li>
+              </ol>
+            </section>
+
+            <section class="source-group" aria-labelledby="src-interaction-h">
+              <h3 id="src-interaction-h">交互设计灵感</h3>
+              <ul class="source-list">
+                <li>Creative Link Effects（Codrops, 2013）——导航下划线浮现与括号滑入效果的灵感。<a class="inline-link" href="https://tympanus.net/codrops/2013/08/06/creative-link-effects/">tympanus.net/codrops</a></li>
+                <li>Inspiration for Inline Anchor Styles（Codrops, 2014）——正文内嵌链接背景高亮效果的灵感。<a class="inline-link" href="https://tympanus.net/codrops/2014/06/04/inspiration-for-inline-anchor-styles/">tympanus.net/codrops</a></li>
+                <li>Image Reveal Hover Effects（Codrops, 2018）——建筑名称悬停显现照片的视觉思路。<a class="inline-link" href="https://tympanus.net/codrops/2018/11/27/image-reveal-hover-effects/">tympanus.net/codrops</a></li>
+              </ul>
+              <p class="group-note">以上仅以纯 CSS 重新实现交互思路，未复制其代码、素材，也未引入任何 JavaScript 依赖。</p>
+            </section>
+
+            <section class="source-group" aria-labelledby="src-photos-h">
+              <h3 id="src-photos-h">照片授权（共 6 张，均来自 Wikimedia Commons）</h3>
+              <ul class="source-list photo-credits">
+                <li>祈年殿·冬日 © Lloyd Tudor，<a class="inline-link" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing_-_February_2024.jpg">来源页</a>（1920×1280，页首用图）</li>
+                <li>祈年殿·晴空 © xiquinhosilva，<a class="inline-link" href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Hall_of_Prayer_for_Good_Harvests_01.jpg">来源页</a>（1280×806，建筑巡礼 · 祈年殿）</li>
+                <li>皇穹宇 © xiquinhosilva，<a class="inline-link" href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Imperial_Vault_of_Heaven_01.jpg">来源页</a>（1280×853，建筑巡礼 · 皇穹宇，兼作主题卡「传承」配图）</li>
+                <li>长廊（七十二连房）© 钉钉，<a class="inline-link" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:72_Long_Corridor,_Temple_of_Heaven.jpg">来源页</a>（1280×960，主题卡「公众使用」配图）</li>
+                <li>石柱雕饰 © William Lung-mun Johnson，<a class="inline-link" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:Close-up_of_Pillars_at_the_Temple_of_Heaven.jpg">来源页</a>（1280×853，主题卡「保护」配图）</li>
+                <li>圜丘坛 © xiquinhosilva，<a class="inline-link" href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>，<a class="inline-link" href="https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_-_Circular_Mound_Altar_01.jpg">来源页</a>（1280×853，建筑巡礼 · 圜丘）</li>
+              </ul>
+            </section>
+
+            <p class="source-note">说明：三张主题卡片的配图均为园区建筑与园林景观照片，非遗展演与数字化工作场景未见于本页照片，相关内容以文字资料为准。页面 HTML / CSS 代码为课程作业，其授权与上述照片许可各自独立；本页并非天坛公园或任何官方机构网站。</p>
+
+          </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="footer-brand">天坛 · 北京</p>
+      <p class="footer-declare">本页为「网页设计」课堂任务 2 的 AI 辅助作业（学号 202511680488），内容整理自 2025—2026 年公开资料，不代表天坛公园或任何官方机构；页面仅含 HTML 与 CSS，不含 JavaScript。</p>
+      <ul class="footer-links">
+        <li><a href="../index.html">站点首页</a></li>
+        <li><a href="../promptlog.html">AI 提示词记录</a></li>
+        <li><a href="../websitelog.html">网站建设日志</a></li>
+        <li><a href="#top">回到页首</a></li>
+      </ul>
+      <p class="footer-meta">照片经 Wikimedia Commons 授权使用并逐张署名（见「资料来源」） ｜ 写于 2026 年 · 网页设计课程</p>
+    </div>
+  </footer>
+
+</body>
+</html>
